@@ -1,0 +1,553 @@
+[
+  {
+    "Test Case ID": "PI_01",
+    "Test Case Name": "PlayerInfo_Check_Audio_Codecs",
+    "Test Objective": "To Get the audio codecs supported by the platform",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SUPPORTED_AUDIO_CODECS should be update in device config file",
+    "APIs": [
+      {
+        "api": "PlayerInfo.1.audiocodecs",
+        "Input Parameters": {},
+        "Expected Output": "SUPPORTED_AUDIO_CODECS"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_02",
+    "Test Case Name": "PlayerInfo_Check_Video_Codecs",
+    "Test Objective": "To Get the video codecs supported by the platform",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SUPPORTED_Video_CODECS should be update in device config file",
+    "APIs": [
+      {
+        "api": "PlayerInfo.1.videocodecs",
+        "Input Parameters": {},
+        "Expected Output": "SUPPORTED_Video_CODECS"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_03",
+    "Test Case Name": "PlayerInfo_Check_AudioEquivalence_Enabled",
+    "Test Objective": "To check the loudness equivalence in the platform",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "PlayerInfo.1.isaudioequivalenceenabled",
+        "Input Parameters": {},
+        "Expected Output": false
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_04",
+    "Test Case Name": "PlayerInfo_Check_Dolby_Atmos_MetaData",
+    "Test Objective": "To Get the Atmos capabilities of sink",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "PlayerInfo.1.dolby_atmosmetadata",
+        "Input Parameters": {},
+        "Expected Output": false
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_05",
+    "Test Case Name": "PlayerInfo_Check_Dolby_Sound_mode",
+    "Test Objective": "To Get the current dolby sound mode",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "PlayerInfo.1.dolby_soundmode",
+        "Input Parameters": {},
+        "Expected Output": "Stereo"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_06",
+    "Test Case Name": "Check_Dolby_AudioMode_Changed_Event",
+    "Test Objective": "To enable or disable the audio output for Atmos",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "PlayerInfo.1.dolby_enableatmosoutput",
+        "Expected Output": null
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_07",
+    "Test Case Name": "SetAndGet_All_Supported_Resolutions",
+    "Test Objective": "To Set and Get all the supported resolutions by STB and TV",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.DisplaySettings.1.getConnectedVideoDisplays",
+        "Input Parameters": "None",
+        "Expected Output": {
+          "connectedVideoDisplays": [
+            "HDMI0"
+          ],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getSupportedResolutions",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0"
+        },
+        "Expected Output": {
+          "supportedResolutions": [
+            "480p",
+            "576p50",
+            "720p",
+            "720p50",
+            "1080i",
+            "1080p",
+            "1080i50",
+            "1080p50",
+            "1080p24",
+            "1080p30",
+            "1080p60"
+          ],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0"
+        },
+        "Expected Output": {
+          "resolution": "1080p",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "1080p",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "720p",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "576p50",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "576p50",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "720p",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "720p",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "720p50",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "720p50",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "1080i",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "1080i",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "1080P50",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "1080P50",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "1080p24",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "1080p24",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "1080p30",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "1080p30",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "1080p60",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "PlayerInfo.1.resolution",
+        "Input Parameters": {},
+        "Expected Output": {
+          "resolution": "1080p60",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0",
+          "resolution": "720p",
+          "persist": true,
+          "ignoreEdid": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getCurrentResolution",
+        "Input Parameters": {
+          "videoDisplay": "HDMI0"
+        },
+        "Expected Output": {
+          "resolution": "720p",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_08",
+    "Test Case Name": "Check_Dolby_AudioMode_Changed_Event",
+    "Test Objective": "To change the audio sound mode and validate dolby_audiomodechanged event",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.DisplaySettings.1.getConnectedAudioPorts",
+        "Input Parameters": {},
+        "Expected Output": {
+          "connectedAudioPorts": "CONNECTED_AUDIO_PORTS",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getSupportedAudioModes",
+        "Input Parameters": "None",
+        "Expected Output": {
+          "supportedAudioModes": "SUPPORTED_AUDIO_MODES",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getSoundMode",
+        "Input Parameters": {
+          "audioPort": "SPEAKER0"
+        },
+        "Expected Output": {
+          "soundMode": "STEREO",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setSoundMode",
+        "Input Parameters": {
+          "audioPort": "HDMI0",
+          "soundMode": "STEREO",
+          "persist": false
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getSoundMode",
+        "Input Parameters": {
+          "audioPort": "SPEAKER0"
+        },
+        "Expected Output": {
+          "soundMode": "STEREO",
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.dolby_audiomodechanged",
+        "Input Parameters": "None",
+        "Expected Output": "STEREO"
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.setSoundMode",
+        "Input Parameters": {
+          "audioPort": "HDMI0",
+          "soundMode": "STEREO",
+          "persist": false
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getSoundMode",
+        "Input Parameters": {
+          "audioPort": "SPEAKER0"
+        },
+        "Expected Output": {
+          "soundMode": "STEREO",
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.dolby_audiomodechanged",
+        "Input Parameters": "None",
+        "Expected Output": "STEREO"
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getSoundMode",
+        "Input Parameters": {
+          "audioPort": "SPEAKER0"
+        },
+        "Expected Output": {
+          "soundMode": "STEREO",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "PI_09",
+    "Test Case Name": "PlayerInfo_ActivateDeactivate_Event_Test",
+    "Test Objective": "Validate the statechange event by Activating and Deactivating the PlayerInfo plugin",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "check the status of PlayerInfo Plugin and activate if its not in activated state using Controller plugin",
+    "APIs": [
+      {
+        "api": "Controller.1.status@PlayerInfo",
+        "Option": "state",
+        "Compare": [
+          "state"
+        ],
+        "Expected Output": {
+          "callsign": "PlayerInfo",
+          "locator": "libWPEFrameworkPlayerInfo.so",
+          "classname": "PlayerInfo",
+          "autostart": true,
+          "configuration": {
+            "root": {
+              "mode": "Off"
+            }
+          },
+          "state": [
+            "activated",
+            "deactivated",
+            "suspended",
+            "resume",
+            "unavailable"
+          ],
+          "observers": 0,
+          "module": "Plugin_PlayerInfo",
+          "hash": "engineering_build_for_debug_purpose_only",
+          "major": 1,
+          "minor": 0,
+          "patch": 5
+        }
+      },
+      {
+        "api": "Controller.1.deactivate",
+        "Input Parameters": {
+          "callsign": "PlayerInfo"
+        },
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.statechange",
+        "Input Parameters": {
+          "callsign": "PlayerInfo"
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "Controller.1.status@PlayerInfo",
+        "Expected Output": [
+          {
+            "callsign": "PlayerInfo",
+            "locator": "libWPEFrameworkPlayerInfo.so",
+            "classname": "PlayerInfo",
+            "autostart": true,
+            "configuration": {
+              "root": {
+                "mode": "Off"
+              }
+            },
+            "state": "deactivated",
+            "observers": 0,
+            "module": "Plugin_PlayerInfo",
+            "hash": "engineering_build_for_debug_purpose_only",
+            "major": 1,
+            "minor": 0,
+            "patch": 5
+          }
+        ]
+      },
+      {
+        "api": "Controller.1.activate",
+        "Input Parameters": {
+          "callsign": "PlayerInfo"
+        },
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.statechange",
+        "Input Parameters": {},
+        "Expected Output": {
+          "STATE": "Deactivated",
+          "CALLSIGN": "PlayerInfo",
+          "REASON": "Requested"
+        }
+      },
+      {
+        "api": "Controller.1.status@PlayerInfo",
+        "Expected Output": [
+          {
+            "callsign": "PlayerInfo",
+            "locator": "libWPEFrameworkPlayerInfo.so",
+            "classname": "PlayerInfo",
+            "autostart": true,
+            "configuration": {
+              "root": {
+                "mode": "Off"
+              }
+            },
+            "state": "activated",
+            "observers": 0,
+            "module": "Plugin_PlayerInfo",
+            "hash": "engineering_build_for_debug_purpose_only",
+            "major": 1,
+            "minor": 0,
+            "patch": 5
+          }
+        ]
+      }
+    ]
+  }
+]

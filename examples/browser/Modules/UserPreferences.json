@@ -1,0 +1,28 @@
+[
+  {
+    "Test Case ID": "UP_01",
+    "Test Case Name": "UserPreferences_SetAndGet_UI_Language",
+    "Test Objective": "Check if able to set and get the user preferred UI language",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.UserPreferences.1.setUILanguage",
+        "Input Parameters": {
+          "ui_language": "US_en"
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.UserPreferences.1.getUILanguage",
+        "Input Parameters": {},
+        "Expected Output": {
+          "ui_language": "US_en",
+          "success": true
+        }
+      }
+    ]
+  }
+]

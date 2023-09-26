@@ -1,0 +1,265 @@
+[
+  {
+    "Test Case ID": "DI_01",
+    "Test Case Name": "DeviceInfo_Get_All_System_Info",
+    "Test Objective": "To Get the system general information",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "DeviceInfo.1.systeminfo",
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_02",
+    "Test Case Name": "DeviceInfo_Get_All_Network_Interfaces",
+    "Test Objective": "To Get all network interface addresses",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+
+        "api": "DeviceInfo.1.addresses",
+        "Input Parameter": "None",
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_03",
+    "Test Case Name": "DeviceInfo_Get_SocketInfo",
+    "Test Objective": "To Get the system socket information",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "DeviceInfo.1.socketinfo",
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_04",
+    "Test Case Name": "DeviceInfo_ActivateDeactivate_STRESS",
+    "Test Objective": "To Activate and Deactivate the DeviceInfo plugin repeatedly and check CPU load",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "Controller.1.status@DeviceInfo",
+        "Input parameters": {},
+        "Option": "state",
+        "Expected Output": {
+          "callsign": "DeviceInfo",
+          "locator": "libWPEFrameworkDeviceInfo.so",
+          "classname": "DeviceInfo",
+          "autostart": true,
+          "configuration": {
+            "root": {
+              "mode": "Off"
+            }
+          },
+          "state": [
+            "activated",
+            "deactivated",
+            "suspended",
+            "resume",
+            "unavailable"
+          ],
+          "observers": 0,
+          "module": "Plugin_DeviceInfo",
+          "hash": "engineering_build_for_debug_purpose_only",
+          "major": 1,
+          "minor": 0,
+          "patch": 5
+        }
+      },
+      {
+        "LOOP_COUNT": 10,
+        "api_list": [
+          {
+            "api": "Controller.1.activate",
+            "Input Parameters": {
+              "callsign": "DeviceInfo"
+            },
+            "Expected Output": null
+          },
+          {
+            "api": "DeviceInfo.1.systeminfo",
+            "Compare": "cpuload",
+            "LIMIT": {
+              "cpuload": 90
+            },
+            "Expected Output": {
+              "cpuload": 90
+            }
+          },
+          {
+            "api": "Controller.1.deactivate",
+            "Input Parameters": {
+              "callsign": "DeviceInfo"
+            },
+            "Expected Output": null
+          }
+        ]
+      },
+      {
+        "api": "Controller.1.activate",
+        "Input Parameters": {
+          "callsign": "DeviceInfo"
+        },
+        "Expected Output": null
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_05",
+    "Test Case Name": "DeviceInfo_Get_Serial_Number",
+    "Test Objective": "To Get the serial number of the test device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "DeviceInfo.1.serialnumber",
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_06",
+    "Test Case Name": "DeviceInfo_Check_Model_Name",
+    "Test Objective": "Checks the model name of the DUT",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_DETAILS_FILE_PATH Should be updated in device config file",
+    "APIs": [
+      {
+        "Input Parameter": "SYSTEM_DEVICE_DETAILS_FILE_PATH ",
+        "api": "DeviceInfo.1.modelname",
+        "Expected Output": {}
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_07",
+    "Test Case Name": "DeviceInfo_Check_Firmware_Version",
+    "Test Objective": "Checks the firmware version of the DUT",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "DeviceInfo.1.firmwareversion",
+        "Input Parameter": "None",
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_08",
+    "Test Case Name": "DeviceInfo_Check_Supported_Audio_Ports",
+    "Test Objective": "Check whether DUT lists supported audio ports",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SUPPORTED_AUDIO_PORTS should be configured in the device specific configuration file",
+    "APIs": [
+      {
+        "api": "DeviceInfo.1.supportedaudioports",
+        "Input Parameter": "SUPPORTED_AUDIO_PORTS",
+        "Expected Output": {
+          "supportedAudioPorts": "SUPPORTED_AUDIO_PORTS"
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_09",
+    "Test Case Name": "DeviceInfo_Check_Supported_Video_Displays",
+    "Test Objective": "Check whether settop displays supported video displays",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SUPPORTED_VIDEO_DISPLAYS should be configured in the device specific configuration file",
+    "APIs": [
+      {
+        "api": "DeviceInfo.1.supportedvideodisplays",
+        "Input Parameter": "SUPPORTED_VIDEO_DISPLAYS",
+        "Expected Output": {
+          "supportedVideoDisplays": "SUPPORTED_VIDEO_DISPLAYS"
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_10",
+    "Test Case Name": "DeviceInfo_Check_Host_EDID",
+    "Test Objective": "Check the EDID status of host",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.DisplaySettings.1.readHostEDID",
+        "Input Parameter": "None",
+        "Expected Output": {
+          "EDID": "dW5rbm93bg==",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_11",
+    "Test Case Name": "DeviceInfo_Check_Default_Resolution",
+    "Test Objective": "Checks whether the default resolution is available in supported resolutions",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.DisplaySettings.1.getConnectedVideoDisplays",
+        "Input Parameter": "None",
+        "Expected Output": {
+          "connectedVideoDisplays": [
+            "HDMI0"
+          ],
+          "success": true
+        }
+      },
+      {
+        "api": "DeviceInfo.1.supportedresolutions",
+        "Input Parameter": "None",
+        "Expected Output":"NOT_EMPTY"
+
+        },
+
+      {
+        "api": "DeviceInfo.1.defaultresolution",
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "DI_12",
+    "Test Case Name": "DeviceInfo_Check_supported_HDCP_Version",
+    "Test Objective": "Check the supported HDCP version",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "DEVICEINFO_SUPPORTED_HDCP_VERSION should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "org.rdk.DisplaySettings.1.getConnectedVideoDisplays",
+        "Input Parameters": {},
+        "Expected Output": {
+          "connectedVideoDisplays": [
+            "HDMI0"
+          ],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.HdcpProfile.getSettopHDCPSupport",
+        "Input Parameters": "DEVICEINFO_SUPPORTED_HDCP_VERSION",
+        "Expected Output": {
+          "supportedHDCPVersion": "DEVICEINFO_SUPPORTED_HDCP_VERSION",
+          "isHDCPSupported": true,
+          "success": true
+        }
+      }
+    ]
+  }
+]

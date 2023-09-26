@@ -1,0 +1,416 @@
+.bodycontent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+header{
+  width: 100%;
+}
+
+.collapsible {
+  background-color: #f9f9f9;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: 1px;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.checkbox-container label {
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: inherit; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Display an ellipsis for long labels */
+  max-width: 80%; /* Ensure labels don't exceed the container width */
+}
+
+label {
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: clip; /* Hide overflowing text
+  /*text-overflow: ellipsis; /* Display an ellipsis for long labels */
+  max-width: 180%; /* Ensure labels don't exceed the container width */
+}
+
+.active {
+  background-color: #ccc;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+#checkboxContainer {
+
+  height: 400px;
+
+  overflow-y: auto;
+
+  /* border: 1px solid #ccc; */
+
+  padding: 10px;
+
+}
+
+#rangeInput {
+
+  overflow-y: auto;
+
+  border: 1px solid #ccc;
+
+  padding: 10px;
+
+}
+
+#tableContainer {
+  width: 100%;
+}
+
+#entryTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#entryTable th,
+#entryTable td {
+  padding: 8px;
+  text-align: left;
+  border: none;
+}
+
+#entryTable th {
+  background-color: #f2f2f2;
+}
+
+.section-box {
+  margin: 20px;
+  border: 2px solid #afc7ff;
+  /* Replace #ff0000 with your desired border color */
+  border-radius: 10px;
+  /* Adjust the value to change the degree of roundness */
+  padding: 20px;
+  /* Optional: Adds some padding inside the div */
+  width: auto;
+  /* Optional: Sets the width of the div */
+  height: auto;
+  /* Optional: Sets the height of the div */
+}
+
+.feed-box{
+  width: 400px;
+}
+
+.colorful-div {
+  width: 400px;
+  height: 200px;
+  display: flex;
+}
+
+.grey-section {
+  flex: 1;
+  background-color: #808080;
+}
+
+.green-section {
+  flex: 1;
+  background-color: #00ff00;
+}
+
+.red-section {
+  flex: 1;
+  background-color: #ff0000;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.progress-line {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  height: 20px;
+}
+
+.progress-line>div {
+  height: 100%;
+}
+
+.passed {
+  background-color: rgba(75, 192, 100, 0.8);
+}
+
+.na {
+  background-color: rgba(207, 207, 207, 0.8);
+}
+
+.failed {
+  background-color: rgba(255, 99, 132, 0.8);
+}
+
+.summaryStats {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.progress-labels span {
+  font-weight: bold;
+}
+
+.progress-percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000000;
+}
+
+.parent-div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.child-div {
+  /* overflow: auto; */
+  height: 500px;
+  width: 350px;
+  overflow-x: scroll;
+  /* Adjust this value as per your requirement */
+  /* Additional styling for child divs */
+}
+
+#informationDiv {
+  display: none;
+}
+
+.sublist {
+  margin-left: 20px;
+  /* Adjust the indentation value as needed */
+}
+
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Style the form container */
+form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the form labels */
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Style the form inputs */
+form input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+/* Style the form submit button */
+form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Add hover effect to the submit button */
+form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  display: none;
+  /* Initially hidden */
+  position: relative;
+  animation: rotate-circle 1s linear infinite;
+}
+
+.loader:before {
+  content: '';
+  position: absolute;
+  border: 4px solid transparent;
+  border-top-color: #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  top: 6px;
+  left: 6px;
+}
+
+@keyframes rotate-circle {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.pi-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.statistics {
+  flex: 1;
+}
+
+#myPieChart {
+  flex: 1;
+}
+
+
+/* Style the label normally */
+label {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+/* Style the label when the associated checkbox receives focus */
+input[type="checkbox"]:focus+label {
+  background-color: #f0f0f0;
+  /* Change this to your desired focus color */
+  outline: 2px solid #007bff;
+  /* Change this to your desired focus outline */
+}
+
+
+/* Style the button when it receives focus */
+.AddedTestcases button:focus {
+  /* background-color: #f0f0f0; Change this to your desired focus color */
+  outline: 2px solid #007bff;
+
+  background-color: red;
+}
+
+/* Style the button when it receives focus */
+button:focus {
+  /* background-color: #f0f0f0; Change this to your desired focus color */
+  outline: 2px solid #007bff;
+
+}
+
+
+
+/* Report collapsible section */
+
+/* Style the button container */
+#buttonContainer {
+  margin: 20px;
+}
+
+/* Style the reportCollapsible button */
+.reportCollapsible {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+/* Style the active reportCollapsible button */
+.active {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content */
+.reportContent {
+  display: none;
+  padding-left: 20px;
+  animation: fade-in 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.hidden-report {
+  display: none;
+}
+
+.visible-report {
+  display: block;
+}
+
+
+/* Define a CSS class */
+.text-style-stats {
+  /* Apply styling properties to the text */
+  font-size: 22px;
+  color: #333;
+  /* Text color */
+  /* font-weight: bold; Text weight */
+  text-decoration: underline;
+  /* Underline the text */
+  /* You can add more styling properties as needed */
+}
+
+.stat-item>span {
+  /* Style properties for the div's direct child spans */
+  padding: 20px;
+  /* color: blue; */
+  /* For example, change text color to blue */
+}

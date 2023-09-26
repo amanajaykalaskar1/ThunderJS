@@ -1,0 +1,1280 @@
+[
+  {
+    "Test Case ID": "SYS_01",
+    "Test Case Name": "System_Get_ESTB_MAC",
+    "Test Objective": "To Get the estb MAC of the test device",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"SYSTEM_DEVICE_PARAMS should be update in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters":{
+          "SystemDeviceParams":"SYSTEM_DEVICE_PARAMS"
+        },
+        "COMPARE_DATA" : [
+          "estb_mac",
+          "success"
+        ],
+        "Expected Output": {
+          "estb_mac": " ",
+          "success": true
+        }
+      }
+
+    ]
+  },
+  {
+
+    "Test Case ID": "SYS_02",
+    "Test Case Name": "System_Get_Serial_Number",
+    "Test Objective": "To Get the serial number of the test device",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getSerialNumber",
+        "Input Parameters":"None",
+        "Expected Output": {
+          "serialNumber":"NOT_EMPTY",
+         "success": true
+        }
+      }
+
+    ]
+  },
+  {
+    "Test Case ID": "SYS_03",
+    "Test Case Name": "System_Get_Version",
+    "Test Objective": "To Get the version details  of the test device",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getSystemVersions",
+        "Input Parameters":"None",
+        "Expected Output": {
+          "stbVersion":"NOT_EMPTY",
+          "receiverVersion":"NOT_EMPTY",
+          "stbTimestamp":"NOT_EMPTY",
+          "success": true
+        }
+      }
+
+    ]
+  },
+  {
+    "Test Case ID": "SYS_04",
+    "Test Case Name": "System_Get_Uptime",
+    "Test Objective": "To Get the uptime of the test device",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.requestSystemUptime",
+        "Input Parameters":"None",
+        "Expected Output": {
+          "systemUptime":"NOT_EMPTY",
+         "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_05",
+    "Test Case Name": "System_Get_Milestones",
+    "Test Objective": "To Get the list of Milestones",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getMilestones",
+        "Input Parameters":"None",
+        "Expected Output": {
+         "milestones":"NOT_EMPTY",
+         "deprecated": true,
+         "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_06",
+    "Test Case Name": "System_Get_Device_XConf_Params",
+    "Test Objective": "To Get the Xconf configuration parameters for the device",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getXconfParams",
+        "Input Parameters":"None",
+        "Expected Output": "NOT_EMPTY",
+         "success": true
+        }
+
+    ]
+  },
+  {
+    "Test Case ID": "SYS_07",
+    "Test Case Name": "System_Get_RFC_Config",
+    "Test Objective": "To Get the Specified RFC configuration information ",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"SYSTEM_RFC_PARAMS should be update in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getRFCConfig",
+        "Input Parameters":{
+          "rfcList": [
+            "Device.DeviceInfo.X_RDKCENTRAL-COM_RFC.Feature.AccountInfo.AccountID"
+        ]
+        },
+        "Expected Output": "NOT_EMPTY",
+         "success": true
+        }
+
+    ]
+  },
+  {
+    "Test Case ID": "SYS_08",
+    "Test Case Name": "System_Toggle_GZ_Enabled_Status",
+    "Test Objective": "To enable and disable the GZ status",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.isGzEnabled",
+        "Input Parameters":"None",
+        "Option": "enabled",
+        "Expected Output": {
+          "enabled":[true,false],
+         "success": true
+        }
+        },
+        {
+          "api":"org.rdk.System.1.setGzEnabled",
+          "Input Parameters":{
+            "enabled": true
+          },
+          "Expected Output":{
+            "deprecated": true,
+            "success": true
+          }
+
+        },
+        {
+          "api": "org.rdk.System.1.isGzEnabled",
+          "Input Parameters":"None",
+        "Option": "enabled",
+        "Expected Output": {
+          "enabled":[true],
+         "success": true
+        }
+        },
+        {
+          "api":"org.rdk.System.1.setGzEnabled",
+          "Input Parameters":{
+            "enabled": false
+          },
+          "Expected Output":{
+            "deprecated": true,
+            "success": true
+          }
+
+        },
+        {
+          "api": "org.rdk.System.1.isGzEnabled",
+          "Input Parameters":"None",
+          "Option": "enabled",
+          "Expected Output": {
+            "enabled":[true,false],
+           "success": true
+          }
+          }
+
+    ]
+  },
+  {
+    "Test Case ID": "SYS_09",
+    "Test Case Name": "System_SetAndGet_Cache_Key_Value",
+    "Test Objective": "To Set and Get cache key value and remove key from cache",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.setCachedValue",
+        "Input Parameters":{
+          "value": 100.23,
+           "key":"sampleKey"
+        },
+        "Expected Output": {
+          "deprecated": true,
+         "success": true
+        }
+       },
+
+       {
+         "api":"org.rdk.System.1.cacheContains",
+         "Input Parameters":{
+          "key":"sampleKey"
+         },
+         "Expected Output":{
+          "deprecated": true,
+          "success": true
+         }
+
+       },
+       {
+        "api":"org.rdk.System.1.getCachedValue",
+        "Input Parameters":{
+          "key":"sampleKey"
+         },
+         "Expected Output": {
+          "sampleKey": "100.23",
+          "deprecated": true,
+          "success": true
+
+         }
+
+       },
+       {
+        "api":"org.rdk.System.1.removeCacheKey",
+        "Input Parameters":{
+          "key":"sampleKey"
+         },
+         "Expected Output":{
+          "deprecated": true,
+          "success": true
+
+         }
+
+       },
+       {
+        "api":"org.rdk.System.1.cacheContains",
+        "Input Parameters":{
+         "key":"sampleKey"
+        },
+        "Expected Output":{
+         "success": false
+        }
+      }
+      ]
+      },
+
+  {
+    "Test Case ID": "SYS_10",
+    "Test Case Name": "System_SetAndGet_Power_State",
+    "Test Objective": "To Set and Get the device power state",
+    "Test Type":"Positive",
+    "TestCase Prerequisites":"None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getAvailableStandbyModes",
+      "Input Parameters": {},
+      "Expected Output": {
+        "supportedStandbyModes": [
+            "LIGHT_SLEEP"
+        ],
+        "success": true
+      }
+        },
+        {
+          "api": "org.rdk.System.1.getPreferredStandbyMode",
+      "Input Parameters": {},
+      "Option": "preferredStandbyMode",
+      "Expected Output": {
+        "preferredStandbyMode": ["LIGHT_SLEEP","DEEP_SLEEP"],
+        "success": true
+      }
+        },
+        {
+          "api": "org.rdk.System.1.setPreferredStandbyMode",
+          "Input Parameters": {
+            "standbyMode": "LIGHT_SLEEP"
+        },
+          "Expected Output": {
+            "success": true
+          }
+        },
+        {
+          "api": "org.rdk.System.1.getPowerState",
+          "Input Parameters": {},
+          "Option": "powerState",
+          "Expected Output": {
+            "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+            "success": true
+          }
+        },
+        {
+          "api":"org.rdk.System.1.setPowerState",
+          "Input Parameters":{
+            "powerState":"STANDBY",
+            "standbyReason":"APIUnitTest"
+          },
+          "Expected Output": {
+            "success":"true"
+
+          }
+        },
+        {
+          "api":"client.events.1.onSystemPowerStateChanged",
+          "Expected Output":"STANDBY",
+          "success":"true"
+        },
+        {
+          "api":"org.rdk.System.1.getPowerState",
+          "Expected Values":"STANDBY",
+          "success":"true"
+
+        }
+      ]
+  },
+
+  {
+    "Test Case ID": "SYS_11",
+    "Test Case Name": "System_SetAndGet_Preferred_StandBy_Mode",
+    "Test Objective": "To set and get all available standby modes as preferred standby modes",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getAvailableStandbyModes",
+        "Input Parameters": {},
+        "Expected Output": {
+          "supportedStandbyModes": [
+              "LIGHT_SLEEP"
+          ],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPreferredStandbyMode",
+        "Input Parameters": {},
+        "Option": "preferredStandbyMode",
+        "Expected Output": {
+          "preferredStandbyMode": ["LIGHT_SLEEP","DEEP_SLEEP"],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.setPreferredStandbyMode",
+        "Input Parameters": {
+          "standbyMode": "LIGHT_SLEEP"
+      },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPreferredStandbyMode",
+        "Input Parameters": {},
+        "Expected Output": {
+          "preferredStandbyMode": "LIGHT_SLEEP",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPreferredStandbyMode",
+        "Input Parameters": {},
+        "Option": "preferredStandbyMode",
+        "Expected Output": {
+          "preferredStandbyMode": ["LIGHT_SLEEP","DEEP_SLEEP"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_12",
+    "Test Case Name": "System_SetAndGet_TimeZone_DST",
+    "Test Objective": "To set and get DST time zone",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.setTimeZoneDST",
+        "Input Parameters": {
+          "timeZone": "UTC-5"
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getTimeZoneDST",
+        "Input Parameters": {},
+        "Expected Output": {
+          "timeZone": "UTC-5",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_13",
+    "Test Case Name": "System_Get_Last_DeepSleep_Reason",
+    "Test Objective": "To retrieve the last deep sleep reason",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_FEATURES Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getLastDeepSleepReason",
+        "Input Parameters": "SYSTEM_DEVICE_FEATURES",
+        "Expected Output": {
+          "reason": "",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_14",
+    "Test Case Name": "System_Get_Core_Temperature",
+    "Test Objective": "To get the core temperature of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_FEATURES Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getCoreTemperature",
+        "Input Parameters": "SYSTEM_DEVICE_FEATURES",
+        "Expected Output": {
+          "temperature": "NOT_EMPTY",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_15",
+    "Test Case Name": "System_Clear_Last_DeepSleep_Reason",
+    "Test Objective": "To Clear the last deep sleep reason",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_FEATURES Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.clearLastDeepSleepReason",
+        "Input Parameters": "SYSTEM_DEVICE_FEATURES",
+        "Expected Output": {
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_16",
+    "Test Case Name": "System_Get_PreviousReboot_Info",
+    "Test Objective": "To get the basic information about previous reboot",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.reboot",
+        "Input Parameters": {},
+        "Expected Output": {
+          "IARM_Bus_Call_STATUS": 0,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPreviousRebootInfo",
+        "Input Parameters": {},
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_17",
+    "Test Case Name": "System_Get_PreviousReboot_Info2",
+    "Test Objective": "To get the detailed information about previous reboot",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.reboot",
+        "Input Parameters": {},
+        "Expected Output": {
+          "IARM_Bus_Call_STATUS": 0,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPreviousRebootInfo2",
+        "Input Parameters": {},
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_18",
+    "Test Case Name": "System_Get_PreviousReboot_Reason",
+    "Test Objective": "To get reason for the  previous reboot",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.reboot",
+        "Input Parameters": {},
+        "Expected Output": {
+          "IARM_Bus_Call_STATUS": 0,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPreviousRebootReason",
+        "Input Parameters": {},
+        "Expected Output": {
+          "reason": "NOT_EMPTY",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_19",
+    "Test Case Name": "System_Get_Temperature_Thresholds",
+    "Test Objective": "To Get the temperature threshold values",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getTemperatureThresholds",
+        "Input Parameters": {},
+        "Expected Output": {
+          "temperatureThresholds": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_20",
+    "Test Case Name": "System_Has_Reboot_BeenRequested",
+    "Test Objective": "To check whether reboot has been requested or not",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.hasRebootBeenRequested",
+        "Input Parameters": {},
+        "Option": "rebootRequested",
+        "Expected Output": {
+          "rebootRequested": [true, false],
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_21",
+    "Test Case Name": "System_Query_MocaStatus",
+    "Test Objective": "To check whether moca is enabled or not",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.queryMocaStatus",
+        "Input Parameters": {},
+        "Option": "mocaEnabled",
+        "Expected Output": {
+          "mocaEnabled": [true, false],
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_22",
+    "Test Case Name": "System_SetAndGet_NORMAL_Mode",
+    "Test Objective": "To Set and Get STB mode to NORMAL",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getMode",
+        "Input Parameters": {},
+        "Expected Output": {
+          "modeInfo": {
+              "mode": "NORMAL",
+              "duration": 0
+          },
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.setMode",
+        "Input Parameters": {
+          "modeInfo": {
+            "mode": "NORMAL",
+            "duration": 10
+          }
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getMode",
+        "Input Parameters": {},
+        "Expected Output": {
+          "modeInfo": {
+              "mode": "NORMAL",
+              "duration": 10
+          },
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_23",
+    "Test Case Name": "System_GetMac_Address",
+    "Test Objective": "To Get the MAC Address of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getMacAddresses",
+        "Input Parameters": {
+          "GUID" : 61734787891723481
+        },
+        "Option": "asyncResponse",
+        "Expected Output": {
+          "asyncResponse": [true, false],
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.onMacAddressesRetreived",
+        "Input Parameters": {},
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_24",
+    "Test Case Name": "System_SetAndGet_Temperature_Thresholds",
+    "Test Objective": "To set and get the temperature threshold levels",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_FEATURES Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getTemperatureThresholds",
+        "Input Parameters": {},
+        "Expected Output": {
+          "temperatureThresholds": "NOT_EMPTY",
+          "success": true
+      }
+      },
+      {
+        "api": "org.rdk.System.1.setTemperatureThresholds",
+        "Input Parameters": {
+          "thresholds": {
+            "WARN": "10.000000",
+            "MAX": "10.000000"
+          }
+      },
+        "Expected Output": {
+          "success": true
+      }
+      },
+      {
+        "api": "org.rdk.System.1.getTemperatureThresholds",
+        "Input Parameters": {},
+        "Expected Output": {
+          "temperatureThresholds": "NOT_EMPTY",
+          "success": true
+      }
+      },
+      {
+        "api": "org.rdk.System.1.setTemperatureThresholds",
+        "Input Parameters": {
+          "thresholds": {
+            "WARN": "100.000000",
+            "MAX": "110.000000"
+          }
+      },
+        "Expected Output": {
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_25",
+    "Test Case Name": "System_Get_Image_Version",
+    "Test Objective": "To Get the image version of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "imageVersion"
+        },
+        "Expected Output": {
+          "imageVersion": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_26",
+    "Test Case Name": "System_Get_model_number",
+    "Test Objective": "To Get the model number of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "model_number"
+        },
+        "Expected Output": {
+          "model_number": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_27",
+    "Test Case Name": "System_Get_boxIP",
+    "Test Objective": "To Get the IP  of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "boxIP"
+        },
+        "Expected Output": {
+          "boxIP": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_28",
+    "Test Case Name": "System_Get_build_type",
+    "Test Objective": "To Get the build type of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "build_type"
+        },
+        "Expected Output": {
+          "build_type": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_29",
+    "Test Case Name": "System_Get_eth_mac",
+    "Test Objective": "To Get the ethernet mac of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "eth_mac"
+        },
+        "Expected Output": {
+          "eth_mac": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_30",
+    "Test Case Name": "System_Get_rf4ce_mac",
+    "Test Objective": "To Get the rf4ce mac of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "RF4CE_MAC should be update in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "rf4ce_mac"
+        },
+        "Expected Output": {
+          "rf4ce_mac": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_31",
+    "Test Case Name": "System_Get_Bluetooth_mac",
+    "Test Objective": "To Get the bluetooth mac of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "bluetooth_mac"
+        },
+        "Expected Output": {
+          "bluetooth_mac": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_32",
+    "Test Case Name": "System_Get_WiFi_Mac",
+    "Test Objective": "To Get the wifi mac of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getDeviceInfo",
+        "Input Parameters": {
+          "params" : "wiﬁ_mac"
+        },
+        "Expected Output": {
+          "wiﬁ_mac": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_33",
+    "Test Case Name": "Check_Power_State_Before_Reboot",
+    "Test Objective": "To Check the device powerstate before reboot",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.reboot",
+        "Input Parameters": {},
+        "Expected Output": {
+          "IARM_Bus_Call_STATUS": 0,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPowerStateBeforeReboot",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_34",
+    "Test Case Name": "System_Check_On_SystemMode_Changed",
+    "Test Objective": "To change system mode and check for mode changed event",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getMode",
+        "Input Parameters": {},
+        "Option": "",
+        "Expected Output": {
+          "modeInfo": {
+              "mode": ["NORMAL","EAS","WAREHOUSE"],
+              "duration": 0
+          },
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_35",
+    "Test Case Name": "System_Check_Reboot_Reason_Event",
+    "Test Objective": "To reboot the device and check onRebootRequest event",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_36",
+    "Test Case Name": "Enable_And_Disable_Telemetry_OptOut_Status",
+    "Test Objective": "To enable and disable telemetry opt-out status",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_37",
+    "Test Case Name": "System_Upgrade_Image",
+    "Test Objective": "To perform image upgrade operation",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_38",
+    "Test Case Name": "System_check_PreviousReboot_Info2_Custom_Reason",
+    "Test Objective": "To reboot with custom reboot reason",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_39",
+    "Test Case Name": "System_Enable_Disable_Moca_Support",
+    "Test Objective": "To enable and disable the moca support",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_FEATURES Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_40",
+    "Test Case Name": "System_SetAndGet_Over-Temperature_Grace_Interval",
+    "Test Objective": "To set and get the over-temperature grace interval",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_FEATURES Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_41",
+    "Test Case Name": "System_Check_Model_Number",
+    "Test Objective": "To check the model number of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_DETAILS_FILE_PATH Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_42",
+    "Test Case Name": "System_Check_Device_Mac_Address",
+    "Test Objective": "To check the mac address of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_DETAILS_FILE_PATH Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_43",
+    "Test Case Name": "System_Check_WebBrowser_Details",
+    "Test Objective": "To check for the webbrowser details",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_44",
+    "Test Case Name": "System_Check_Power_State_Management_Status",
+    "Test Objective": "To check for the power state management status",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_POWER_STATE_MANAGED_BY_DEVICE should be configured in the config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_45",
+    "Test Case Name": "System_Check_Firmware_Upgrade_Status",
+    "Test Objective": "Checks the firmware upgrade status",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_46",
+    "Test Case Name": "System_Check_Public_IP_Address",
+    "Test Objective": "To Validate the Public IP Address of the DUT",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_47",
+    "Test Case Name": "System_Check_HDR_Capabilities",
+    "Test Objective": "To check the HDR Capabilities of the device",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_DETAILS_FILE_PATH Should be updated in device config file",
+    "APIs": [
+      {
+        "api": "Controller.1.status@org.rdk.DisplaySettings",
+        "COMPARE_DATA": [
+          "callsign",
+          "state"
+        ],
+        "Expected Output": {
+          "callsign": "org.rdk.DisplaySettings",
+          "state": "activated"
+        }
+      },
+      {
+        "api": "org.rdk.DisplaySettings.1.getConnectedVideoDisplays",
+        "Input Parameters": {},
+        "Expected Output": {
+          "connectedVideoDisplays": [
+            "HDMI0"
+          ],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.1.getPlatformConfiguration",
+        "Input Parameters": {},
+        "COMPARE_DATA": [
+          "HdrCapability",
+          "success"
+        ],
+        "Expected Output": {
+          "HdrCapability": "none",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_48",
+    "Test Case Name": "SetAndGet_All_Time_Zones",
+    "Test Objective": "To Set and get all the time zones",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.2.getTimeZones",
+        "Input Parameters": {},
+        "Expected Output": {
+          "zoneinfo": "NOT_EMPTY",
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_49",
+    "Test Case Name": "System_Toggle_Network_Standby_Mode_Status",
+    "Test Objective": "To Toggle Network Standby Mode Status",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "SYSTEM_DEVICE_FEATURES should be configured in the config file",
+    "APIs": [
+      {
+        "api": "org.rdk.System.getNetworkStandbyMode",
+        "Input Parameters": {},
+        "Expected Output": {
+          "nwStandby": false,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.setNetworkStandbyMode",
+        "Input Parameters": {
+          "nwStandby": true
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.System.getNetworkStandbyMode",
+        "Input Parameters": {},
+        "Expected Output": {
+          "nwStandby": false,
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.onNetworkStandbyModeChanged",
+        "Input Parameters": {
+          "nwStandby": true
+        },
+        "Expected Output": {
+          "success": true
+      }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_50",
+    "Test Case Name": "Check_Power_State_Before_Reboot_On_Standby_State",
+    "Test Objective": "To Check the device powerstate before reboot on standby state",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_51",
+    "Test Case Name": "Check_Time_Zones_Persist_After_Reboot",
+    "Test Objective": "Checks whether time zone setting is persist after reboot",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "SYS_52",
+    "Test Case Name": "System_Reboot_And_Check_System_Uptime",
+    "Test Objective": "To reboot and check the system uptime",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.System.1.getPowerState",
+        "Input Parameters": {},
+        "Option": "powerState",
+        "Expected Output": {
+          "powerState": ["STANDBY","DEEP_SLEEP","LIGHT_SLEEP","ON"],
+          "success": true
+        }
+      }
+    ]
+  }
+]

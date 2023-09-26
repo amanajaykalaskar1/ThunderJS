@@ -1,0 +1,187 @@
+[
+  {
+    "Test Case ID": "WH_01",
+    "Test Case Name": "WareHouse_Get_STB_Device_Info",
+    "Test Objective": "Check if able to get all the STB device info",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.getDeviceInfo",
+        "Input Parameters": {},
+        "Expected Output": "NOT_EMPTY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_02",
+    "Test Case Name": "WareHouse_Set_Front_Panel_State_None",
+    "Test Objective": "Check if able to set the front panel state to 'None'",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WAREHOUSE_NA_TESTS should be updated in config file",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.setFrontPanelState",
+        "Input Parameters": {
+          "state": 1
+        },
+        "Expected Output": {
+          "success": true,
+          "error": "unsupported"
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_03",
+    "Test Case Name": "WareHouse_Set_Front_Panel_State_Download_In_Progress",
+    "Test Objective": "Check whether able to set the front panel state to 'DOWNLOAD IN PROGRESS'",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WAREHOUSE_NA_TESTS should be updated in config file",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.setFrontPanelState",
+        "Input Parameters": {
+          "state": 1
+        },
+        "Expected Output": {
+          "success": true,
+          "error": "unsupported"
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_04",
+    "Test Case Name": "WareHouse_Set_Front_Panel_State_Download_Failed",
+    "Test Objective": "Check whether able to set the front panel state to 'DOWNLOAD FAILED'",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WAREHOUSE_NA_TESTS should be updated in config file",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.setFrontPanelState",
+        "Input Parameters": {
+          "state": 1
+        },
+        "Expected Output": {
+          "success": true,
+          "error": "unsupported"
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_05",
+    "Test Case Name": "WareHouse_Set_Front_Panel_State_Download_Invalid",
+    "Test Objective": "Check whether able to set the front panel state to invalid value",
+    "Test Type": "Negative",
+    "TestCase Prerequisites": "WAREHOUSE_NA_TESTS should be updated in config file",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.setFrontPanelState",
+        "Input Parameters": {
+          "state": 1
+        },
+        "Expected Output": {
+          "success": true,
+          "error": "unsupported"
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_06",
+    "Test Case Name": "WareHouse_Light_Reset",
+    "Test Objective": "check if able to Perform a light reset of application data",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.lightReset",
+        "Input Parameters": {},
+        "Expected Output": {
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_07",
+    "Test Case Name": "WareHouse_Check_Is_Clean",
+    "Test Objective": "Verifies the locations where customer data may get stored",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.isClean",
+        "Input Parameters": {},
+        "Expected Output": {
+          "clean": false,
+          "files": [
+            "/opt/data/recorder"
+          ],
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_08",
+    "Test Case Name": "WareHouse_Reset_Device",
+    "Test Objective": "Check if able to reset the STB to the warehouse state",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WAREHOUSE_NA_TESTS should be updated in config file",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.resetDevice",
+        "Input Parameters": {},
+        "Expected Output": {
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_09",
+    "Test Case Name": "WareHouse_Internal_Reset",
+    "Test Objective": "Check if able to do the internal reset",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WAREHOUSE_NA_TESTS should be updated in config file",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.internalReset",
+        "Input Parameters": {
+          "passPhrase": "FOR TEST PURPOSES ONLY"
+        },
+        "Expected Output": {
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WH_10",
+    "Test Case Name": "WareHouse_Check_Event_On_Device_Reset",
+    "Test Objective": "Verify the whether the event is received on device reset",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WAREHOUSE_NA_TESTS should be updated in config file",
+    "APIs": [
+      {
+        "api": "org.rdk.Warehouse.1.resetDevice",
+        "Input Parameters": {
+          "resetType": "USERFACTORY"
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.resetDone",
+        "Input Parameters": {},
+        "Expected Output": {
+          "success": true
+        }
+      }
+    ]
+  }
+]

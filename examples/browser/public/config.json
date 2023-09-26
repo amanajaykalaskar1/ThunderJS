@@ -1,0 +1,129 @@
+{
+  "NA": [
+    "******************DISPLAYSETTINGS*****************",
+    "Set_And_Get_MS12_Audio_Compression",
+    "Enable_And_Disable_Dolby_Volume_Mode",
+    "Set_And_Get_Dialog_Enhancement",
+    "Set_And_Get_Intelligent_Equalizer_Mode",
+    "Set_And_Get_Volume_Leveller_HDMI0",
+    "Set_And_Get_DRC_Mode_HDMI0",
+    "Set_And_Get_Audio_Delay_HDMI0",
+    "Set_And_Get_Audio_Delay_Offset_HDMI0",
+    "Check_Sink_Atmos_Capability",
+    "Enable_Disable_Audio_Atmos_Output_Mode",
+    "Is_Connected_Device_Repeater",
+    "Set_And_Get_Supported_Audio_Modes_SPDIF0",
+    "Set_And_Get_Supported_Audio_Modes_IDLR0",
+    "Set_And_Get_Supported_Audio_Modes_SPEAKER0",
+    "Set_And_Get_Volume_Leveller_SPDIF0",
+    "Set_And_Get_Volume_Leveller_IDLR0",
+    "Set_And_Get_Volume_Leveller_SPEAKER0",
+    "Set_And_Get_DRC_Mode_SPDIF0",
+    "Set_And_Get_DRC_Mode_IDLR0",
+    "Set_And_Get_DRC_Mode_SPEAKER0",
+    "Set_And_Get_Volume_Level_SPDIF0",
+    "Set_And_Get_Volume_Level_IDLR0",
+    "Set_And_Get_Volume_Level_SPEAKER0",
+    "Set_And_Get_Gain_SPDIF0",
+    "Set_And_Get_Gain_IDLR0",
+    "Set_And_Get_Gain_SPEAKER0",
+    "Mute_And_Unmute_Audio_SPDIF0",
+    "Mute_And_Unmute_Audio_IDLR0",
+    "Mute_And_Unmute_Audio_SPEAKER0",
+    "Set_And_Get_Audio_Delay_SPDIF0",
+    "Set_And_Get_Audio_Delay_IDLR0",
+    "Set_And_Get_Audio_Delay_SPEAKER0",
+    "Set_And_Get_Audio_Delay_Offset_SPDIF0",
+    "Set_And_Get_Audio_Delay_Offset_IDLR0",
+    "Set_And_Get_Audio_Delay_Offset_SPEAKER0",
+    "Enable_And_Disable_AudioPort_SPDIF0",
+    "Enable_And_Disable_AudioPort_IDLR0",
+    "Enable_And_Disable_AudioPort_SPEAKER0",
+    "Set_And_Get_Volume_Leveller_Modes_HDMI0",
+    "Set_And_Get_Negative_Audio_Delay",
+    "SetAndGet_Supported_Color_Depth_Capabilities",
+    "******************WAREHOUSE*****************",
+    "WareHouse_Set_Front_Panel_State_None",
+    "WareHouse_Set_Front_Panel_State_Download_In_Progress",
+    "WareHouse_Set_Front_Panel_State_Download_Failed",
+    "WareHouse_Set_Front_Panel_State_Download_Invalid"
+  ],
+  "SETTOP_SUPPORTED_RESOLUTIONS": [
+    "480p",
+    "576p50",
+    "720p",
+    "720p50",
+    "1080i",
+    "1080p",
+    "1080i50",
+    "1080p50",
+    "1080p24",
+    "1080p30",
+    "1080p60"
+  ],
+  "SUPPORTED_VIDEO_DISPLAYS": [
+    "HDMI0"
+  ],
+  "CONNECTED_AUDIO_PORTS": [
+    "HDMI0"
+  ],
+  "SUPPORTED_AUDIO_PORTS": [
+    "HDMI0",
+    "SPDIF0"
+  ],
+  "HDR_SUPPORT": false,
+  "ZOOM_SETTINGS": [
+    "FULL",
+    "NONE"
+  ],
+  "DISPLAYSETTINGS_SUPPORTED_FEATURES": [
+    "DeviceRepeater",
+    "Gain"
+  ],
+  "DEVICE_REPEATER": false,
+  "SETTOP_SUPPORTED_AUDIO_CAPABILITIES": [
+    "none"
+  ],
+  "SETTOP_SUPPORTED_MS12_CAPABILITIES": [
+    "none"
+  ],
+  "WEBKIT_PREREQ_DEACTIVATE_PLUGINS": [
+    "Cobalt"
+  ],
+  "WEBKIT_EXPECTED_FPS": 30,
+  "WEBKIT_TEST_URL": "https://www.google.com/",
+  "WEBKIT_TEST_URL_1": "https://translate.google.co.in/",
+  "WEBKIT_TEST_INVALID_URL": "https://www.tdk-page-test.com/",
+  "WEBKIT_FPS_REPEAT_COUNT": 60,
+  "WEBKIT_THRESHOLD_FPS": 5,
+  "VISIBILITY": [
+    "visible",
+    "hidden"
+  ],
+  "SUPPORTED_AUDIO_CODECS": [
+    "AudioMpeg1",
+    "AudioMpeg3",
+    "AudioMpeg2",
+    "AudioMpeg4",
+    "AudioAac",
+    "AudioAc3",
+    "AudioDts",
+    "AudioAc3Plus",
+    "AudioOpus",
+    "AudioVorbisOgg"
+  ],
+  "SUPPORTED_Video_CODECS": [
+    "VideoMpeg2",
+    "VideoMpeg4",
+    "VideoMpeg",
+    "VideoH263",
+    "VideoH264",
+    "VideoH265",
+    "VideoVp8",
+    "VideoVp9"
+  ],
+  "WAREHOUSE_NA_TESTS": "frontpanel",
+  "SUPPORTED_AUDIO_MODES": ["STEREO","SURROUND"],
+  "DEVICEINFO_SUPPORTED_HDCP_VERSION":"1.4"
+
+  }

@@ -1,0 +1,46 @@
+Initializing the library:- initializing ThunderJS with a host IP address and port:
+
+
+import ThunderJS from './thunderJS'
+const config = {
+  host: '192.168.1.100', // IP address of the box that runs Thunder (WPEframework) - required
+        port: 2020, // defaults to 80    
+}
+const thunderJS = ThunderJS(config)
+Note:- In place of default port we are using port: 9998.
+Making API calls:-
+Thunder using the call method or the object-based syntax. API calls consist of specifying the plugin, method, and optional parameters.
+     Option 1 - Argument based                                     Option 2 - Object based
+      const plugin = 'DeviceInfo'                                                          const params = {
+const method = 'systeminfo'                                                       foo: 'bar'
+const params = {                                                                            }
+  foo: 'bar'
+}                                                                                                        thunderJS.DeviceInfo.systeminfo(params)
+
+thunderJS.call(plugin, method, params)
+
+
+
+
+
+
+Processing the result of an API call:-
+ To process the result of an API call, ThunderJS library supports 2 ways of processing the results of API calls, either the promise-based   or callback-based approach.
+     Option 1 - Promise based                                                                                 Option 2 - Callback based
+      thunderJS.DeviceInfo.systeminfo()                                                                  thunderJS.DeviceInfo.systeminfo((err, result) => {
+            .then(result => {                                                                                                  if(err) {
+               console.log('Success', result)                                                                           console.error('Error', err)
+             }).catch(err => {                                                                                                  }
+               console.error('Error', err)                                                                               else {
+             })                                                                                                                              console.log('Success!', result) }})
+       
+
+
+
+Notifications:-
+ThunderJS provides a way to subscribe to specific events and execute a callback function upon receiving notifications for each event. 
+We can define a listener by specifying the plugin and event, along with a callback function to handle the received notification. 
+      const listener = thunderJS.on('Controller', 'statechange', (notification) => { 
+          console.log('Execute this callback on every notification', notification) 
+       })
+       

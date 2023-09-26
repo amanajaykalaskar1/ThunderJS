@@ -1,0 +1,31 @@
+[
+  {
+    "Test Case ID": "",
+    "Test Case Name": "",
+    "Test Objective": "",
+    "Test Type": "",
+    "TestCase Prerequisites": "",
+    "APIs": [
+      {
+        "api": "",
+        "Input Parameters": {},
+        "Compare": [
+          "",
+          ""
+        ],
+        "Option": "",
+        "Expected Output": {},
+        "SAVE": "",
+        "LOOP": {
+          "KEY_WORD": [
+            ""
+          ],
+          "api_list": [
+            {},
+            {}
+          ]
+        }
+      }
+    ]
+  }
+]

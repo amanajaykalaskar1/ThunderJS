@@ -1,0 +1,580 @@
+[
+  {
+    "Test Case ID": "WEB_01",
+    "Test Case Name": "WebkitBrowser_SetAndGet_URL",
+    "Test Objective": "To Launch the given URL in the WebKitBrowser and verify the loadfinished event on loading the URL",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_TEST_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_02",
+    "Test Case Name": "WebkitBrowser_Toggle_Visibility",
+    "Test Objective": "Check if able to toggle the current browser visibility and also verify the visibilitychange event on changing the browser visibility",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_TEST_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      },
+      {
+        "api": "WebKitBrowser.1.visibility",
+        "Input Parameters": {},
+        "Option": "",
+        "Expected Output": "VISIBILITY"
+      },
+      {
+        "api": "WebKitBrowser.1.visibility",
+        "Input Parameters": "hidden",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.visibilitychange",
+        "Input Parameters": {},
+        "Expected Output": {
+          "hidden": true,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.visibility",
+        "Option": "",
+        "Input Parameters": {},
+        "Expected Output": "VISIBILITY"
+      },
+      {
+        "api": "WebKitBrowser.1.visibility",
+        "Input Parameters": "visible",
+        "Expected Output": null
+      },
+      {
+        "api": "WebKitBrowser.1.visibility",
+        "Input Parameters": {},
+        "Option": "",
+        "Expected Output": "VISIBILITY"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_03",
+    "Test Case Name": "WebkitBrowser_Check_FPS",
+    "Test Objective": "Verifies the FPS value by launching graphics URL",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_FPS_REPEAT_COUNT,WEBKIT_GRAPHICS_URL,WEBKIT_EXPECTED_FPS and WEBKIT_THRESHOLD_FPS should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "LightningApp.1.url",
+        "Input Parameters": {},
+        "Expected Output": {}
+      },
+      {
+        "api": "LightningApp.1.fps",
+        "Input Parameters": {},
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_04",
+    "Test Case Name": "WebkitBrowser_Change_Cookie_Accept_Policy",
+    "Test Objective": "Check if able to change the http cookie accept policy.",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_TEST_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      },
+      {
+        "api": "WebKitBrowser.1.httpcookieacceptpolicy",
+        "Input Parameters": {},
+        "Option": "cookie_accept_policy",
+        "Expected Output": {
+          "cookie_accept_policy": [
+            "always",
+            "never",
+            "onlyfrommaindocumentdomain",
+            "exclusivelyfrommaindocumentdomain"
+          ]
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.httpcookieacceptpolicy",
+        "Input Parameters": "always",
+        "Expected Output": null
+      },
+      {
+        "api": "WebKitBrowser.1.httpcookieacceptpolicy",
+        "Input Parameters": {},
+        "Option": "cookie_accept_policy",
+        "Expected Output": {
+          "cookie_accept_policy": [
+            "always"
+          ]
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.httpcookieacceptpolicy",
+        "Input Parameters": "onlyfrommaindocumentdomain",
+        "Expected Output": null
+      },
+      {
+        "api": "WebKitBrowser.1.httpcookieacceptpolicy",
+        "Input Parameters": {},
+        "Option": "cookie_accept_policy",
+        "Expected Output": {
+          "cookie_accept_policy": [
+            "always",
+            "never",
+            "onlyfrommaindocumentdomain",
+            "exclusivelyfrommaindocumentdomain"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_05",
+    "Test Case Name": "WebkitBrowser_Toggle_Local_Storage_Enabled_Status",
+    "Test Objective": "Check if able to toggle local storage availability status ",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.localstorageenabled",
+        "Input Parameters": {},
+        "Option": "enabled",
+        "Expected Output": {
+          "enabled": [
+            true,
+            false
+          ]
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.localstorageenabled",
+        "Input Parameters": false,
+        "Expected Output": null
+      },
+      {
+        "api": "WebKitBrowser.1.localstorageenabled",
+        "Input Parameters": {},
+        "Option": "enabled",
+        "Expected Output": {
+          "enabled": [
+            false
+          ]
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.localstorageenabled",
+        "Input Parameters": true,
+        "Expected Output": null
+      },
+      {
+        "api": "WebKitBrowser.1.localstorageenabled",
+        "Input Parameters": {},
+        "Option": "enabled",
+        "Expected Output": {
+          "enabled": [
+            true,
+            false
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_06",
+    "Test Case Name": "WebkitBrowser_SetAndGet_Preferred_Languages",
+    "Test Objective": "Check if able to set and get the user preferred languages",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_TEST_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      },
+      {
+        "api": "WebKitBrowser.1.languages",
+        "Input Parameters": [
+          "en",
+          "en-US"
+        ],
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "languages": [
+            "en",
+            "en-US"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_07",
+    "Test Case Name": "WebkitBrowser_SetAndGet_Invalid_URL",
+    "Test Objective": "Verifies loadfailed event by launching invalid URL in the browser",
+    "Test Type": "Negative",
+    "TestCase Prerequisites": "WEBKIT_TEST_INVALID_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.tdk-page-test.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfailed",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.tdk-page-test.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.tdk-page-test.com/"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_08",
+    "Test Case Name": "WebkitBrowser_Change_Browser_URLs",
+    "Test Objective": "Verifies urlchange event by launching different URLs in the browser",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_TEST_URL and WEBKIT_TEST_URL_1 should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://translate.google.co.in/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/translate.google.co.in\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.urlchange",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/translate.google.co.in\/",
+          "loaded": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https:\/\/translate.google.co.in\/"
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_09",
+    "Test Case Name": "WebkitBrowser_SetAndGet_UserAgent",
+    "Test Objective": "Check if able to set and get the useragent string used by the browser",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.useragent",
+        "Expected Output": "NOT_EMPTY"
+      },
+      {
+        "api": "WebKitBrowser.1.useragent",
+        "Input Parameters": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15 WPE/1.0",
+        "Expected Output": null
+      },
+      {
+        "api": "WebKitBrowser.1.useragent",
+        "Input Parameters": {},
+        "Expected Output": "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15 WPE/1.0"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_10",
+    "Test Case Name": "WebkitBrowser_SuspendAndResume",
+    "Test Objective": "Verify statechange event by changing webkitbrowser plugin state",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.state",
+        "Input Parameters": "suspended",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.statechange",
+        "Input Parameters": {},
+        "Expected Output": {
+          "suspended": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.state",
+        "Option": "state",
+        "Expected Output": {
+          "state": [
+            "suspended"
+          ]
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.state",
+        "Input Parameters": "resumed",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.statechange",
+        "Input Parameters": {},
+        "Expected Output": {
+          "suspended": false
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.state",
+        "Option": "state",
+        "Expected Output": {
+          "state": [
+            "resumed"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_11",
+    "Test Case Name": "WebkitBrowser_SetAndGet_Headers",
+    "Test Objective": "Check if able to set and get the userAgent browser header",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_TEST_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.headers",
+        "Input Parameters": [
+          {
+            "name": "X-Forwarded-For",
+            "value": "::1"
+          }
+        ],
+        "Expected Output": null
+      },
+      {
+        "api": "WebKitBrowser.1.headers",
+        "Expected Output": {
+          "name": "X-Forwarded-For",
+          "value": "::1"
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_12",
+    "Test Case Name": "WebkitBrowser_Reload_URL",
+    "Test Objective": "Checks the reload functionality in the browser with the given URL ",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "WEBKIT_TEST_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.google.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.loadfinished",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.google.com\/",
+          "httpstatus": 200,
+          "success": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      }
+    ]
+  },
+  {
+    "Test Case ID": "WEB_13",
+    "Test Case Name": "WebkitBrowser_Check_URL_Change_Event_For_Invalid_URL",
+    "Test Objective": "Verifies url change event by launching invalid URL in the browser",
+    "Test Type": "Negative",
+    "TestCase Prerequisites": "WEBKIT_TEST_INVALID_URL should be configured in the device specific config file",
+    "APIs": [
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.google.com/"
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Input Parameters": "https://www.tdk-page-test.com/",
+        "Expected Output": null
+      },
+      {
+        "api": "client.events.1.urlchange",
+        "Input Parameters": {},
+        "Expected Output": {
+          "url": "https:\/\/www.tdk-page-test.com\/",
+          "loaded": true
+        }
+      },
+      {
+        "api": "WebKitBrowser.1.url",
+        "Expected Output": "https://www.tdk-page-test.com/"
+      }
+    ]
+  }
+]
