@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-header{
+header {
   width: 100%;
 }
 
@@ -23,17 +23,24 @@ header{
 }
 
 .checkbox-container label {
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: inherit; /* Hide overflowing text */
-  text-overflow: ellipsis; /* Display an ellipsis for long labels */
-  max-width: 80%; /* Ensure labels don't exceed the container width */
+  white-space: nowrap;
+  /* Prevent text from wrapping */
+  overflow: inherit;
+  /* Hide overflowing text */
+  text-overflow: ellipsis;
+  /* Display an ellipsis for long labels */
+  max-width: 80%;
+  /* Ensure labels don't exceed the container width */
 }
 
 label {
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: clip; /* Hide overflowing text
+  white-space: nowrap;
+  /* Prevent text from wrapping */
+  overflow: clip;
+  /* Hide overflowing text
   /*text-overflow: ellipsis; /* Display an ellipsis for long labels */
-  max-width: 180%; /* Ensure labels don't exceed the container width */
+  max-width: 180%;
+  /* Ensure labels don't exceed the container width */
 }
 
 .active {
@@ -47,33 +54,27 @@ label {
   transition: max-height 0.2s ease-out;
 }
 
-
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
+  /* display: grid; */
+  grid-template-columns: 30% 69%;
+  gap: 20px;
 }
 
 #checkboxContainer {
-
   height: 400px;
-
   overflow-y: auto;
-
   /* border: 1px solid #ccc; */
-
   padding: 10px;
-
 }
 
 #rangeInput {
-
   overflow-y: auto;
-
   border: 1px solid #ccc;
-
   padding: 10px;
-
+  margin-left: 40px;
 }
 
 #tableContainer {
@@ -108,10 +109,18 @@ label {
   /* Optional: Sets the width of the div */
   height: auto;
   /* Optional: Sets the height of the div */
+
+  /* background-image: radial-gradient(rgb(211, 229, 255), rgb(190, 253, 255), rgb(109, 245, 255)); */
+  background-color: #e2e8f0;
+  /* color: lightgray; */
 }
 
-.feed-box{
-  width: 400px;
+.feed-box {
+  overflow: auto;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
 }
 
 .colorful-div {
@@ -185,13 +194,14 @@ label {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  flex-direction: row;
 }
 
 .child-div {
   /* overflow: auto; */
   height: 500px;
-  width: 350px;
-  overflow-x: scroll;
+  width: 100%;
+  /* overflow-x: scroll; */
   /* Adjust this value as per your requirement */
   /* Additional styling for child divs */
 }
@@ -209,8 +219,8 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
-
 
 /* Style the form container */
 form {
@@ -289,12 +299,11 @@ form input[type="submit"]:hover {
   }
 }
 
-
 .pi-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 800px;
+  width: 50%;
   margin: 0 auto;
   padding: 20px;
 }
@@ -306,7 +315,6 @@ form input[type="submit"]:hover {
 #myPieChart {
   flex: 1;
 }
-
 
 /* Style the label normally */
 label {
@@ -322,12 +330,10 @@ input[type="checkbox"]:focus+label {
   /* Change this to your desired focus outline */
 }
 
-
 /* Style the button when it receives focus */
 .AddedTestcases button:focus {
   /* background-color: #f0f0f0; Change this to your desired focus color */
   outline: 2px solid #007bff;
-
   background-color: red;
 }
 
@@ -335,13 +341,9 @@ input[type="checkbox"]:focus+label {
 button:focus {
   /* background-color: #f0f0f0; Change this to your desired focus color */
   outline: 2px solid #007bff;
-
 }
 
-
-
 /* Report collapsible section */
-
 /* Style the button container */
 #buttonContainer {
   margin: 20px;
@@ -386,7 +388,6 @@ button:focus {
   }
 }
 
-
 .hidden-report {
   display: none;
 }
@@ -394,7 +395,6 @@ button:focus {
 .visible-report {
   display: block;
 }
-
 
 /* Define a CSS class */
 .text-style-stats {
@@ -413,4 +413,106 @@ button:focus {
   padding: 20px;
   /* color: blue; */
   /* For example, change text color to blue */
+}
+
+.header-style {
+  height: 10px;
+  min-height: 150px;
+}
+
+.header-div-style {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
+}
+
+.logo-image {
+  height: 50px;
+}
+
+.header-title {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.heartbeat-div {
+  width: 400px;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+}
+
+.ip-input {
+  color: black;
+}
+
+.service-div {
+  max-width: 100%;
+}
+
+.service-div-container {
+  height: 120px;
+  overflow-y: scroll;
+}
+
+.test-process-div {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+}
+
+.list-div {
+  overflow: scroll;
+  height: 400px;
+  width: 300px;
+}
+
+.test-buttons {
+  height: 40px;
+  width: 100px;
+}
+
+.range-input {
+  width: 150px;
+}
+
+
+.content-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  align-self: center;
+}
+
+.content-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+  /* align-self: center; */
+}
+
+.align-left {
+  justify-content: left;
+}
+
+.button-height {
+  height: fit-content;
+}
+
+.pi-bg-green {
+  background-color: rgba(75, 192, 100, 0.8);
+}
+
+.pi-bg-red {
+  background-color: rgba(255, 99, 132, 0.8);
+}
+
+.pi-bg-gray {
+  background-color: rgba(204, 204, 204, 0.8);
+}
+
+.text-xl {
+  font-size: x-large;
 }

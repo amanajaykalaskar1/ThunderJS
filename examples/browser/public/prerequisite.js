@@ -24,6 +24,14 @@ function Preq() {
     "PlayerInfo": {
       "api": "Controller.1.activate",
       "input": { "callsign": "PlayerInfo" }
+    },
+    "System": {
+      "api": "Controller.1.activate",
+      "input": { "callsign": "System" }
+    },
+    "Timer": {
+      "api": "Controller.1.activate",
+      "input": { "callsign": "Timer" }
     }
 
   }

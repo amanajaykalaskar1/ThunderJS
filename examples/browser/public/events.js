@@ -10,7 +10,6 @@ thunderJS.on('disconnect', () => {
   heartbeat = false
 })
 
-
 //Displaysettings Resolution changed
 thunderJS.on('org.rdk.DisplaySettings', 'resolutionChanged', notification => {
   const { width, height, videoDisplayType, resolution } = notification
@@ -62,20 +61,6 @@ thunderJS.on('PlayerInfo', 'dolby_audiomodechanged', notification => {
   console.log('mode:', mode)
   console.log('enable:', enable)
   eventDict['dolby_audiomodechanged'] = notification
-})
-//get System onMacAddressesRetreived
-thunderJS.on('org.rdk.System', 'onMacAddressesRetreived', notification => {
-  const {  } = notification
-  console.log('<<onMacAddressesRetreived  event>>' + JSON.stringify(notification))
-  eventDict['onMacAddressesRetreived'] = notification
-})
-
-
-//get System onNetworkStandbyModeChanged
-thunderJS.on('org.rdk.System', 'onNetworkStandbyModeChanged', notification => {
-  const {  } = notification
-  console.log('<<onNetworkStandbyModeChanged  event>>' + JSON.stringify(notification))
-  eventDict['onNetworkStandbyModeChanged'] = notification
 })
 
 // //set warehouse reset_Device
@@ -130,6 +115,76 @@ thunderJS.on('WebKitBrowser', 'statechange', notification => {
   console.log('<<statechange  event>>' + JSON.stringify(notification))
   console.log('suspended:', suspended)
   eventDict['statechange'] = notification
+})
+
+//get System onSystemPowerStateChanged
+thunderJS.on('org.rdk.System', 'onSystemPowerStateChanged', notification => {
+  const { powerState, currentPowerState } = notification
+  console.log('<<onSystemPowerStateChanged  event>>' + JSON.stringify(notification))
+  console.log('powerState:', powerState)
+  console.log('currentPowerState:', currentPowerState)
+  eventDict['onSystemPowerStateChanged'] = notification
+})
+
+//get System onMacAddressesRetreived
+thunderJS.on('org.rdk.System', 'onMacAddressesRetreived', notification => {
+  const { ecm_mac, estb_mac, moca_mac, eth_mac, wifi_mac, bluetooth_mac, rf4ce_mac, info, success } = notification
+  console.log('<<onMacAddressesRetreived  event>>' + JSON.stringify(notification))
+  console.log('ecm_mac:', ecm_mac)
+  console.log('estb_mac:', estb_mac)
+  console.log('moca_mac:', moca_mac)
+  console.log('eth_mac:', eth_mac)
+  console.log('wifi_mac:', wifi_mac)
+  console.log('bluetooth_mac:', bluetooth_mac)
+  console.log('rf4ce_mac:', rf4ce_mac)
+  console.log('info:', info)
+  console.log('success:', success)
+  eventDict['onMacAddressesRetreived'] = notification
+})
+
+//get System onSystemModeChanged
+thunderJS.on('org.rdk.System', 'onSystemModeChanged', notification => {
+  const { mode } = notification
+  console.log('<<onSystemModeChanged  event>>' + JSON.stringify(notification))
+  console.log('mode:', mode)
+  eventDict['onSystemModeChanged'] = notification
+})
+
+//get System onRebootRequest
+thunderJS.on('org.rdk.System', 'onRebootRequest', notification => {
+  const { requestedApp, rebootReason } = notification
+  console.log('<<onRebootRequest  event>>' + JSON.stringify(notification))
+  console.log('requestedApp:', requestedApp)
+  console.log('rebootReason:', rebootReason)
+  eventDict['onRebootRequest'] = notification
+})
+
+//get System onNetworkStandbyModeChanged
+thunderJS.on('org.rdk.System', 'onNetworkStandbyModeChanged', notification => {
+  const { nwStandby } = notification
+  console.log('<<onNetworkStandbyModeChanged  event>>' + JSON.stringify(notification))
+  console.log('nwStandby:', nwStandby)
+  eventDict['onNetworkStandbyModeChanged'] = notification
+})
+
+//get Timer timerExpired
+thunderJS.on('org.rdk.Timer', 'timerExpired', notification => {
+  const { timerId, mode, status } = notification
+  console.log('<<timerExpired  event>>' + JSON.stringify(notification))
+  console.log('timerId:', timerId)
+  console.log('mode:', mode)
+  console.log('status:', status)
+  eventDict['timerExpired'] = notification
+})
+
+//get Timer timerExpiryReminder
+thunderJS.on('org.rdk.Timer', 'timerExpiryReminder', notification => {
+  const { timerId, mode, timeRemaining } = notification
+  console.log('<<timerExpiryReminder  event>>' + JSON.stringify(notification))
+  console.log('timerId:', timerId)
+  console.log('mode:', mode)
+  console.log('timeRemaining:', timeRemaining)
+  eventDict['timerExpiryReminder'] = notification
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////

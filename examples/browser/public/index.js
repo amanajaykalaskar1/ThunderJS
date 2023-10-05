@@ -17,6 +17,8 @@
  * limitations under the License.
  */
 
+// const { report } = require("process");
+
 
 // initialization:
 var thunderJS
@@ -38,8 +40,77 @@ var passedNumberOfTestcases = 0;
 var NANumberOfTestcases = 0;
 const emptyArray = ["", "None", NaN, {}, []]
 
+document.addEventListener('DOMContentLoaded', function () {
+  //add event listners to buttons
+  listJsonFilesAndLoadData()
+  buttonListnerIitialization();
 
 
+  var reportTable = {}
+  reportTable["Module"] = ["TOTAL"]
+  reportTable["Passed"] = [0]
+  reportTable["Failed"] = [0]
+  reportTable["NA"] = [0]
+  reportTable["Total"] = [0]
+  updateReportTable(reportTable)
+
+
+  // Retrieve the string from localStorage
+  const dataToSend = localStorage.getItem('userInput');
+
+  // Send the data to the server using a fetch POST request
+  fetch('/save-string', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain', // Set the content type to plain text
+    },
+    body: dataToSend, // Send the retrieved data as the request body
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result); // Server response
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+  // ... add more function calls as needed
+});
+
+function buttonListnerIitialization() {
+  addButtonClickListener('changeIP', 'saveInput');
+  addButtonClickListener('selectAllTestCases', 'selectAllTestCases');
+  addButtonClickListener('RunAllTestCases', 'RunAllTestCases');
+  addButtonClickListener('deleteAllSelectedTestCases', 'deleteAllSelectedTestCases');
+  addButtonClickListener('runSelectedTestCases', 'runSelectedTestCases');
+  addButtonClickListener('toggleCheckboxes', 'toggleCheckboxes');
+  addButtonClickListener('downloadLogs','downloadLogs');
+  addButtonClickListener('downloadDivContentAsPDF_reportTable','downloadReportSummary','reportTable');
+
+
+
+}
+
+function addButtonClickListener(buttonId, functionName, ...args) {
+  var button = document.getElementById(buttonId);
+
+  if (button) {
+    button.addEventListener('click', function () {
+      // Check if the function name exists in the global scope
+      if (typeof window[functionName] === 'function') {
+        window[functionName](...args); // Call the function with arguments
+      } else {
+        console.error('Function does not exist:', functionName);
+      }
+    });
+  } else {
+    console.error('Button not found with ID:', buttonId);
+  }
+}
+
+
+
+// onclick="saveInput()"
 function saveInput() {
   const userInput = document.getElementById('userInput').value;
 
@@ -337,13 +408,13 @@ function listJsonFilesAndLoadData() {
         jsonFileDict[jsonFile] = jsonData;
         createButton(jsonFile);
 
-       });
+      });
     })
     .catch(error => {
       console.error('Error fetching JSON data:', error);
     });
 }
-listJsonFilesAndLoadData();
+
 
 
 //collecting the files inside Modules
@@ -423,7 +494,7 @@ function feedConfigData(obj) {
 }
 
 // import { aman } from "./feedConfigData.js";
-var aman
+// var aman
 // originalConsoleLog(aman)
 
 
@@ -1236,7 +1307,7 @@ async function RunTestCase(apimodule, testcase) {
         if (Object.keys(params).length !== 0) stepDataObject["Input Parameters"] = params
       }
       stepDataObject["Expected Output"] = expectedOutput
-      if (response !== null) stepDataObject["Api Response"] = response
+      if (response !== null || clientFlag) stepDataObject[(clientFlag) ? "Notification Data" : "Api Response"] = (clientFlag) ? eventDict[plugin] : response
       stepDataObject[`Step ${step + 1} Result`] = (result) ? "SUCCESS" : "FAILURE"
 
       if (!result) {
@@ -2176,18 +2247,7 @@ function summaryTable() {
 
   reportTableObject = reportTable
 
-  const summary_table = document.getElementById("reportTable");
-  const tableHtml = createTableFromObject(reportTable);
-
-  // Clone the table before appending it to summary_table
-  const tableHtmlClone = tableHtml.cloneNode(true);
-  summary_table.appendChild(tableHtmlClone);
-
-  const report = document.getElementById("summary-report-stats");
-  const summary_table_title = document.createElement('h3');
-  summary_table_title.textContent = "Summary Table:";
-  report.appendChild(summary_table_title);
-  report.appendChild(tableHtml);
+  updateReportTable(reportTable);
 
   // const summary_stat_title = document.createElement('h3')
   // summary_stat_title.textContent = "Execution Stat:"
@@ -2200,6 +2260,23 @@ function summaryTable() {
   // const stat_table = generateHTMLFromDict(stat)
   // report.appendChild(summary_stat_title)
   // report.innerHTML += stat_table
+}
+
+function updateReportTable(reportTable) {
+  const summary_table = document.getElementById("reportTable");
+  const tableHtml = createTableFromObject(reportTable);
+
+  // Clone the table before appending it to summary_table
+  const tableHtmlClone = tableHtml.cloneNode(true);
+  summary_table.innerHTML = '';
+  summary_table.appendChild(tableHtmlClone);
+
+  const report = document.getElementById("summary-report-stats");
+  const summary_table_title = document.createElement('h3');
+  summary_table_title.textContent = "Summary Table:";
+  report.appendChild(summary_table_title);
+  report.appendChild(tableHtml);
+
 }
 
 const summarytableCSVbutton = document.getElementById("summarytableCSVbutton")
@@ -2343,3 +2420,7 @@ async function heart() {
   heart()
 }
 heart()
+
+
+
+

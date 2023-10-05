@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 ​
+
 <head>
   <meta charset="utf-8">
   <title>ThunderJS - Browser example</title>
@@ -8,163 +9,188 @@
   <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
   <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-​
 </head>
 ​
+
 <body class="bg-gray-100">
-​
+  ​
   <div id="WholeCode" class="">
     <div>
-      <header class="bg-gray-900" style="height: 10px; min-height: 150px;">
-        <div style="display: flex; justify-content: space-between ; padding: 2px;">
+      <header class="bg-gray-900 header-style">
+        <div class="header-div-style">
           <!-- logo -->
-          <div class="p-4">
-            <img style="height: 50px;" src="RDK-Logo.png" alt="RDK">
-            <h1 class="text-gray-100 text-xl" style="font-weight: bold; font-size: 30px;">RDK Services Browser Test Tool UI</h1>
+          <div class=" p-4">
+            <img class="logo-image" src="./images/RDK-Logo.png" alt="RDK">
+            <h1 class="text-gray-100 text-xl header-title">RDK Services Browser Test Tool
+              UI</h1>
           </div>
           <!-- Device HeartBeat -->
-          <div id="HeartBeat" class="container p-4 section-box" style="width: 400px; color: white; padding: 10px; margin: 5px;">
+          <div id="HeartBeat" class="container p-4 section-box heartbeat-div">
             <h1 class="text-black-100 text-xl">Device Status</h1>
-            <div id="displayDiv">
-              <!-- The input will be displayed here -->
-            </div>
-            <input placeholder="Input IP address" type="text" id="userInput" style="color: black;">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm" onclick="saveInput()">Change</button>
+            <div id="displayDiv"><!-- The input text will be displayed here --></div>
+            <input class="ip-input" placeholder="Input IP address" type="text" id="userInput">
+            <button id="changeIP"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm">Change</button>
           </div>
         </div>
       </header>
-​
-​
+      ​
+      ​
       <main class="px-8">
         <!-- services Div -->
-        <div class="container p-4 section-box" style="max-width: 100%;">
-​
+        <div class="container p-4 section-box service-div"> ​
           <h1 class="text-black-100 text-xl ">Services</h1>
-          <div id="moduleFiles" style="height: 100px;overflow-y: scroll;"></div>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-            onclick="selectAllTestCases()"> Select All Testcases </button>
-​
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-            onclick="RunAllTestCases()"> Run All Testcases </button>
-​
+          <div id="moduleFiles" class="service-div-container"></div>
+          <button id="selectAllTestCases"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"> Select All
+            Testcases </button>
+          ​
+          <button id="RunAllTestCases"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"> Run All
+            Testcases </button>
+          ​
         </div>
-​
-        <div class="parent-div" style="display: flex; flex-direction: row; max-width: 100%;">
-​
+
+        <!-- testcase details sections -->
+        <div class="test-process-div parent-div">
+
           <!-- available testcases -->
-          <div class="feed-box container p-4 section-box child-div" >
-​
-            <h1 class="text-black-100 text-xl ">Available TestCases</h1>
-​
-            <!-- Testcases List -->
-            <div class="checkbox-container " id="informationDiv"></div>
-          </div>
-          <!-- add/delete testcases button -->
-          <div class="vertical-center" style="display: flex;flex-direction: column;">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-              style="height: fit-content;" id="addTC"> Add </button>
-​
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-              style="height: fit-content;" onclick="deleteAllSelectedTestCases()">
-              Delete All </button>
-          </div>
-​
-​
-​
-          <!-- Added Testcases -->
-          <div class="feed-box container p-4 section-box child-div" >
-            <h1 class="text-black-100 text-xl ">Added Testcases</h1>
-            <div id="AddedTestcases" class="AddedTestcases"><br></div>
-          </div>
-​
-          <!-- execute -->
-          <div class="vertical-center" style="display: flex; flex-direction: column;">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-              style="height: fit-content;" onclick="runSelectedTestCases()"> Execute </button>
-            <div id="loader" class="loader"></div>
-            <!-- <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm" style="height:fit-content;" onclick=""> Stop </button> -->
-          </div>
-​
-​
-​
-          <!-- live logs -->
-          <div class="feed-box" >
-            <div class="p-4 section-box child-div feed-box"">
-              <h1 class="text-black-100 text-xl" style="text-align: center;">Live Execution Logs</h1>
+          <div class="child-div">
+
+            <div class="feed-box container p-4 section-box "> ​
+              <h1 class="text-black-100 text-xl ">Available TestCases</h1>
               <!-- Testcases List -->
-              <div id="Livelog">Test-Cases<br></div>
+              <div class="checkbox-container list-div" id="informationDiv"></div>
+
             </div>
+
+            <!--select range for testcases -->
+            <div class="range-input-div">
+              <input class="range-input" type="text" id="rangeInput" placeholder="Enter range (e.g., 1-5)">
+              <button id="toggleCheckboxes"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm">Choose
+                Range</button>
+            </div>
+
+          </div>
+
+
+          <!-- add/delete testcases button -->
+          <div class="vertical-center child-div">
             <button
-              class="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rectangular text-xs download button"
-              onclick="downloadLogs()" style="display: block;margin: auto;">Download</button>
+              class="test-buttons bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm custom-button"
+              id="addTC"> Add </button>
+            <button id="deleteAllSelectedTestCases"
+              class="test-buttons bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm custom-button">Delete
+              All </button>
+          </div>
+          ​
+          ​
+          ​
+          <!-- Added Testcases -->
+          <div class="container p-4 section-box child-div">
+            <h1 class="text-black-100 text-xl ">Added Testcases</h1>
+            <div id="AddedTestcases" class="AddedTestcases list-div"><br></div>
+          </div>
+          ​
+          <!-- execute -->
+          <div class="vertical-center child-div">
+            <button id="runSelectedTestCases"
+              class="test-buttons bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm">Execute
+            </button>
+            <div id="loader" class="loader"></div>
+          </div>
+          ​
+
+          <!-- live logs -->
+          <div class="child-div">
+            <div class="p-4 section-box child-div feed-box">
+              <h1 class=" text-black-100 text-xl">Live Execution Logs</h1>
+              <!-- Testcases List -->
+              <div id="Livelog" class="list-div">Test-Cases<br></div>
+            </div>
+            <button id="downloadLogs"
+              class="test-buttons bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm">Download</button>
           </div>
         </div>
       </main>
-​
+      ​
     </div>
-    <!--select range for testcases -->
-    <div style="margin-left: 20px;">
-      <input type="text" id="rangeInput" placeholder="Enter range (e.g., 1-5)">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-        style="height: fit-content;" onclick="toggleCheckboxes()">Choose Range</button>
-    </div>
-​
+
+    ​
     <!-- Execution Stats -->
     <div class="section-box">
-​
-      <h1 class="text-black-100 text-xl">Detailed Summary Execution Logs:</h1>
-      <div class="pi-container">
-        <div class="statistics text-style-stats" id="statistics">
-          <!-- <h2>Statistics</h2> -->
-          <div class="stat-item">
-            <span class="color-box" style="background-color: rgba(75, 192, 100, 0.8);"></span>
-            <span class="label">Passed:</span>
-            <span class="value" id="passed">0</span>
-            <span class="percentage" id="passedPercentage">0%</span>
+      ​
+
+      <div class="content-column">
+
+        <h1 class="text-black-i100 text-xl">Detailed Summary Execution
+          Logs
+        </h1>
+
+        <div class="content-row">
+
+          <div class="content-column">
+            <div id="reportTable">
+              <h1 class="text-black-100 text-xl">Report Table:</h1>
+            </div>
+
+            <div class="content-row align-left">
+              <button id="downloadReportSummary" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
+                >Download Summary</button>
+              <button id="downloadDivContentAsPDF_reportTable" lass="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
+                >PDF</button>
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
+                id="summarytableCSVbutton">CSV</button>
+            </div>
+
           </div>
-          <div class="stat-item">
-            <span class="color-box" style="background-color: rgba(255, 99, 132, 0.8);"></span>
-            <span class="label">Failed:</span>
-            <span class="value" id="failed">0</span>
-            <span class="percentage" id="failedPercentage">0%</span>
-          </div>
-          <div class="stat-item">
-            <span class="color-box" style="background-color: rgba(204, 204, 204, 0.8);"></span>
-            <span class="label">Skipped:</span>
-            <span class="value" id="skipped">0</span>
-            <span class="percentage" id="skippedPercentage">0%</span>
+
+          <div class="pi-container statistics text-style-stats" id="statistics">
+            <div class="content-column">
+              <div class="stat-item content-row">
+                <span class="color-box pi-bg-green"></span>
+                <span class="label">Passed:</span>
+                <span class="value" id="passed">0</span>
+                <span class="percentage" id="passedPercentage">0%</span>
+              </div>
+              <div class="stat-item content-row">
+                <span class="color-box pi-bg-red"></span>
+                <span class="label">Failed:</span>
+                <span class="value" id="failed">0</span>
+                <span class="percentage" id="failedPercentage">0%</span>
+              </div>
+              <div class="stat-item content-row">
+                <span class="color-box pi-bg-gray"></span>
+                <span class="label">Skipped:</span>
+                <span class="value" id="skipped">0</span>
+                <span class="percentage" id="skippedPercentage">0%</span>
+              </div>
+            </div>
+            <!-- <h2>Statistics</h2> -->
+            <canvas id="myPieChart"></canvas>
           </div>
         </div>
-        <canvas id="myPieChart"></canvas>
       </div>
-​
+
+
+      ​
       <!-- Report Table -->
-      <div id="reportTable">
-        <div id="deviceInfo"></div>
-        <h1 class="text-black-100 text-xl">Report Table:</h1>
-      </div>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-        style="height: fit-content;" onclick="downloadReportSummary()">Download Summary</button>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-        style="height: fit-content;" onclick="downloadDivContentAsPDF('reportTable') ">PDF</button>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-        style="height: fit-content;" id="summarytableCSVbutton">CSV</button>
-​
       <div class="grid-container">
         <!-- Summary Box -->
         <div class="grid-child">
+          <h1 class="grid-child">Plugin List</h1>
           <!-- <h1 class="text-black-100 text-xl">Summary:</h1> -->
           <!-- <div id="summary" -->
           <div
             class="container mx-auto p-4 my-8 h-64 rounded-sm border border-gray-300 shadow-lg overflow-auto text-sm text=gray-700">
-​
+            ​
             <div id="collapsible-container"></div>
           </div>
         </div>
         <!-- Log Box -->
         <div class="grid-child">
+          <h1 class="grid-child">Summary</h1>
           <!-- <h1 class="text-black-100 text-xl">Logs:</h1> -->
           <div id="log"
             class="container mx-auto p-4 my-8 h-64 rounded-sm border border-gray-300 shadow-lg overflow-auto text-sm text=gray-700">
@@ -172,24 +198,22 @@
         </div>
       </div>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-        style="height: fit-content;" onclick="downloadReport()">Download Report</button>
+        onclick="downloadReport()">Download Report</button>
       <button id="downloadButton123"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-        style="height: fit-content;" onclick="printDiv('hiddenReportDiv')">PDF</button>
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm">PDF</button>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded-full text-sm"
-        style="height: fit-content;" id="reportCSVbutton">CSV</button>
+        id="reportCSVbutton">CSV</button>
     </div>
-​
+    ​
     <!-- Hidden Report Section -->
     <div class="section-box" style="display: block;">
-​
-      <div id="hiddenReportDiv" style="display: block;">
+      <div id="hiddenReportDiv">
         <h1 class="text-black-100 text-xl">Report</h1>
         <div id="summary-report-stats">
         </div>
       </div>
     </div>
-​
+    ​
     <div class="section-box">
       <h1 class="text-black-100 text-xl">Custom API call:</h1>
       <form id="myForm">
@@ -200,21 +224,48 @@
         <input type="submit" value="Submit">
       </form>
     </div>
-​
+    ​
   </div>
-​
+  <div id="sshResponse">ssh </div>
+  ​
   <!-- script section -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-​
+  ​
   <script src="thunderJS.js"></script>
   <script src="index.js"></script>
   <script src="report.js"></script>
-​
-  <script src="printThis.js"></script>
+  ​
+
+  <script>
+    document.getElementById('downloadButton123').addEventListener('click', async () => {
+      const contentToConvert = document.getElementById('hiddenReportDiv').innerHTML;
+      const response = await fetch('/generate-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ contentToConvert })
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'generated.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } else {
+        console.error('Error generating PDF');
+      }
+    });
+  </script>
   <!-- <script src="script.js"></script> -->
-  <script src=""></script>
-​
+  <script src="client.js" type="module"></script>
+  ​
 </body>
 ​
+
 </html>

@@ -1,0 +1,323 @@
+[
+  {
+    "Test Case ID": "TIME_01",
+    "Test Case Name": "Start_And_Get_Timer_Status",
+    "Test Objective": "To start the timer and check the timer status and timerExpired event",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Timer.1.startTimer",
+        "Input Parameters": {
+          "interval": 15,
+          "mode": "GENERIC",
+          "repeatInterval": 0,
+          "remindBefore": 0
+        },
+        "Expected Output": {
+          "timerId": "NOT_EMPTY",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimerStatus",
+        "Input Parameters": {
+          "timerId": 0
+        },
+        "COMPARE_DATA": [
+          "state",
+          "success"
+        ],
+        "Expected Output": {
+          "state": "NOT_EMPTY",
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.timerExpired",
+        "Input Parameters": {},
+        "Expected Output": {
+          "status": 0,
+          "timerId": 0,
+          "mode": "GENERIC",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimerStatus",
+        "Input Parameters": {
+          "timerId": 0
+        },
+        "Expected Output": {
+          "state": "EXPIRED",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "TIME_02",
+    "Test Case Name": "Start_And_Cancel_Timer",
+    "Test Objective": "To start the timer and cancel the timer",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Timer.1.startTimer",
+        "Input Parameters": {
+          "interval": 15,
+          "mode": "GENERIC",
+          "repeatInterval": 0,
+          "remindBefore": 0
+        },
+        "Expected Output": {
+          "timerId": 1,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.cancel",
+        "Input Parameters": {
+          "timerId": 1
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimerStatus",
+        "Input Parameters": {
+          "timerId": 1
+        },
+        "Expected Output": {
+          "state": "CANCELED",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "TIME_03",
+    "Test Case Name": "Suspend_And_Resume_Timer",
+    "Test Objective": "To suspend and resume the timer and get the timer status",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Timer.1.startTimer",
+        "Input Parameters": {
+          "interval": 15,
+          "mode": "GENERIC",
+          "repeatInterval": 0,
+          "remindBefore": 0
+        },
+        "Expected Output": {
+          "timerId": 2,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.suspend",
+        "Input Parameters": {
+          "timerId": 2
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimerStatus",
+        "Input Parameters": {
+          "timerId": 2
+        },
+        "Expected Output": {
+          "state": "SUSPENDED",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.resume",
+        "Input Parameters": {
+          "timerId": 2
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimerStatus",
+        "Input Parameters": {
+          "timerId": 2
+        },
+        "Expected Output": {
+          "state": "RUNNING",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimerStatus",
+        "Input Parameters": {
+          "timerId": 2
+        },
+        "Expected Output": {
+          "state": "EXPIRED",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "TIME_04",
+    "Test Case Name": "Start_And_Cancel_Timers",
+    "Test Objective": "To start and cancel multiple timers",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Timer.1.startTimer",
+        "Input Parameters": {
+          "interval": 15,
+          "mode": "GENERIC",
+          "repeatInterval": 0,
+          "remindBefore": 0
+        },
+        "Expected Output": {
+          "timerId": 3,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.startTimer",
+        "Input Parameters": {
+          "interval": 15,
+          "mode": "GENERIC",
+          "repeatInterval": 0,
+          "remindBefore": 0
+        },
+        "Expected Output": {
+          "timerId": 4,
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimers",
+        "Input Parameters": {},
+        "Expected Output": {
+          "timers": [
+              {
+                  "timerID": 0,
+                  "state": "RUNNING",
+                  "mode": "WAKE",
+                  "timeRemaining": "1894.646",
+                  "repeatInterval": "2000.000",
+                  "remindBefore": "1000.000"
+              }
+          ],
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.cancel",
+        "Input Parameters": {
+          "timerId": 3
+        },
+        "Expected Output": {
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.cancel",
+        "Input Parameters": {
+          "timerId": 4
+        },
+        "Expected Output": {
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "TIME_05",
+    "Test Case Name": "Start_And_Check_Timer_Expired_Event",
+    "Test Objective": "To start the timer and check for timerExpired event",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Timer.1.startTimer",
+        "Input Parameters": {
+          "interval": 15,
+          "mode": "GENERIC",
+          "repeatInterval": 0,
+          "remindBefore": 0
+        },
+        "Expected Output": {
+          "timerId": 5,
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.timerExpired",
+        "Input Parameters": {},
+        "Expected Output": {
+          "status": 0,
+          "timerId": 5,
+          "mode": "GENERIC",
+          "success": true
+        }
+      },
+      {
+        "api": "org.rdk.Timer.1.getTimerStatus",
+        "Input Parameters": {
+          "timerId": 5
+        },
+        "Expected Output": {
+          "state": "EXPIRED",
+          "success": true
+        }
+      }
+    ]
+  },
+  {
+    "Test Case ID": "TIME_06",
+    "Test Case Name": "Start_And_Check_Timer_Expiry_Reminder_Event",
+    "Test Objective": "To start the timer and check for timerExpiryReminder event",
+    "Test Type": "Positive",
+    "TestCase Prerequisites": "None",
+    "APIs": [
+      {
+        "api": "org.rdk.Timer.1.startTimer",
+        "Input Parameters": {
+          "interval": 15,
+          "mode": "GENERIC",
+          "repeatInterval": 0,
+          "remindBefore": 5
+        },
+        "Expected Output": {
+          "timerId": 6,
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.timerExpiryReminder",
+        "Input Parameters": {},
+        "Expected Output": {
+          "timeremaining": 5,
+          "timerId": 6,
+          "mode": "GENERIC",
+          "success": true
+        }
+      },
+      {
+        "api": "client.events.1.timerExpired",
+        "Input Parameters": {},
+        "Expected Output": {
+          "status": 0,
+          "timerId": 6,
+          "mode": "GENERIC",
+          "success": true
+        }
+      }
+    ]
+  }
+]
