@@ -34,6 +34,7 @@ var checkedIndicesDict = {};
 var passedDict = {};
 var failedDict = {};
 var NAedDict = {};
+var xlsxReport = {};
 
 var totalNumberOfTestcases = 0;
 var passedNumberOfTestcases = 0;
@@ -84,9 +85,8 @@ function buttonListnerIitialization() {
   addButtonClickListener('deleteAllSelectedTestCases', 'deleteAllSelectedTestCases');
   addButtonClickListener('runSelectedTestCases', 'runSelectedTestCases');
   addButtonClickListener('toggleCheckboxes', 'toggleCheckboxes');
-  addButtonClickListener('downloadLogs','downloadLogs');
-  addButtonClickListener('downloadDivContentAsPDF_reportTable','downloadReportSummary','reportTable');
-
+  addButtonClickListener('downloadLogs', 'downloadLogs');
+  addButtonClickListener('downloadDivContentAsPDF_reportTable', 'downloadReportSummary', 'reportTable');
 
 
 }
@@ -850,6 +850,10 @@ async function runSelectedTestCases() {
   plugins_title.textContent = "Plugin List: "
   report.appendChild(plugins_title)
 
+  xlsxReport["Summary"] = [
+    ["Plugin", "Passed", "Failed", "NA", "Total"]
+  ];
+
   for (var key in checkedIndicesDict) {
 
     const PluginDiv = document.createElement('div')
@@ -891,6 +895,9 @@ async function runSelectedTestCases() {
     report.appendChild(PluginDiv)
     // const lineBreak = document.createElement("br");
     // report.appendChild(lineBreak)
+
+
+    xlsxReport[key] = [['TC ID', 'TC NAME', 'TC PREREQUSITE', 'TC STEPS', 'TC RESULT']]
 
     var value = checkedIndicesDict[key];
     console.log("Running Module:", key);
@@ -943,84 +950,6 @@ var passedArray = [];
 var failedArray = [];
 
 
-async function newRunTestCase(pluginName, testcase_index) {
-  const tc = jsonFileDict[pluginName][testcase_index];
-  var stepData = [];
-
-  //fixed testcase data - description
-  const testCaseId = tc["Test Case ID"]
-  const testCaseName = tc["Test Case Name"]
-  const testObjective = tc["Test Objective"]
-  const testType = tc["Test Type"]
-  const testCasePrerequisites = (tc.hasOwnProperty("TestCase Prerequisites")) ? tc["TestCase Prerequisites"] : "None"
-  var testCaseResult = false;
-
-  //checking if it is NA
-  const notAvailable = config["NA"].includes(testCaseName)
-  if (notAvailable) {
-    testCaseResult = "NA"
-    if (!NAedDict.hasOwnProperty(pluginName)) {
-      NAedDict[pluginName] = []
-    }
-    NAedDict[pluginName].push(testCaseName)
-  }
-  else {
-    const steps = tc["APIs"];
-
-    for (let step in steps) {
-      const step_api = tc["APIs"][step]
-      // if(step.hasOwnProperty('api_list')){
-
-      // }
-      const step_result = await newRunAPI(step_api)
-      step_result.hasOwnProperty('')
-      //Logging the result
-      const stepResult = (result) ? "-> Passed." : "-> Failed!";
-
-      // log(`Step ${step + 1}: ${stepResult}`);
-      console.log(`Step ${step + 1}: ${stepResult}`);
-      if (!result) {
-        failedTestCase(step + 1, testcase)
-        if (!failedDict.hasOwnProperty(apimodule)) {
-          failedDict[apimodule] = []
-        }
-        failedDict[apimodule].push(testCaseName)
-        console.log("\n")
-      }
-      if (result && step == numberOfAPIs - 1) {
-        passedNumberOfTestcases++;
-        passedTestCase(testcase);
-        if (!passedDict.hasOwnProperty(apimodule)) {
-          passedDict[apimodule] = []
-        }
-        passedDict[apimodule].push(testCaseName)
-        testCaseResult = true
-        console.log("\n");
-      }
-
-
-    }
-  }
-
-}
-
-async function newRunAPI(step_api) {
-
-  const api_string = step_api["api"];
-  const method = api_string.slice(0, api_string.indexOf("1") + 1) || api_string.slice(0, api_string.lastIndexOf("."));
-  const plugin = api_string.slice(api_string.lastIndexOf(".") + 1);
-
-  var params = (step_api.hasOwnProperty('Input Parameters')) ? step_api['Input Parameters'] : {}
-
-  const expectedOutput = feedConfigData(step_api["Expected Output"]);
-
-  var result = false;
-  var apiResponse = null;
-
-  const response = runAPICall(method, plugin, params)
-  const output_response = await checkobjects(expectedOutput, response)
-  return output_response
-}
 
 async function checkobjects(expectedOutput, response) {
   if (response == true) {
@@ -1367,6 +1296,17 @@ async function RunTestCase(apimodule, testcase) {
   }
   if (!collapsibleData[apimodule]) { collapsibleData[apimodule] = [] }
   collapsibleData[apimodule].push(testData)
+
+
+  //xlsx step data
+  xlsxReport[apimodule].push([
+    testData.data['Test Case ID'],
+    testData.data["Test Case Name"],
+    testData.data["TestCase Prerequisites:"],
+    testData.data["Test steps"],
+    testData.data["Test Case Result"]
+  ]);
+
 
   // console.log("Collapsibledata: " + collapsibleData)
 
@@ -2238,12 +2178,21 @@ function summaryTable() {
     failed_count += f
     na_count += na
     total_count += total
+
+    xlsxReport["Summary"].push(
+      [module, p, f, na, total]
+    );
+
   }
   reportTable["Module"].push("TOTAL")
   reportTable["Passed"].push(passed_count)
   reportTable["Failed"].push(failed_count)
   reportTable["NA"].push(na_count)
   reportTable["Total"].push(total_count)
+
+  xlsxReport["Summary"].push(
+    ["TOTAL", passed_count, failed_count, na_count, total_count]
+  );
 
   reportTableObject = reportTable
 
@@ -2286,8 +2235,35 @@ summarytableCSVbutton.addEventListener("click", function () {
 
 const reportCSVbutton = document.getElementById("reportCSVbutton")
 reportCSVbutton.addEventListener("click", function () {
-  downloadCSV(reportCSVobject);
+  // downloadCSV(reportCSVobject);
+
+
+  const data = xlsxReport;
+
+  fetch('/generate-excel', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.blob())
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'generated-excel.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
 })
+
+
 
 function downloadCSV(data) {
   let columnNames, columnData;

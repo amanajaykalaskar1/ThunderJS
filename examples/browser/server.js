@@ -86,6 +86,71 @@ app.post('/save-string', (req, res) => {
 
 
 
+//xlsx download req
+const ExcelJS = require('exceljs');
+// const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+// app.post('/generate-excel', (req, res) => {
+//   const workbook = new ExcelJS.Workbook();
+//   const sheetsData = req.body;
+
+//   // Iterate over the sheets in the client's data object
+//   for (const sheetName in sheetsData) {
+//     if (sheetsData.hasOwnProperty(sheetName)) {
+//       const sheetData = sheetsData[sheetName];
+//       const worksheet = workbook.addWorksheet(sheetName);
+
+//       // Add data to the worksheet
+//       sheetData.forEach((rowData) => {
+//         worksheet.addRow(rowData);
+//       });
+//     }
+//   }
+
+//   // Generate the Excel file
+//   res.setHeader(
+//     'Content-Type',
+//     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+//   );
+//   res.setHeader(
+//     'Content-Disposition',
+//     'attachment; filename=generated-excel.xlsx'
+//   );
+
+//   workbook.xlsx.write(res).then(() => {
+//     res.end();
+//   });
+// });
+
+const generateExcel = require('./routes/excelGenerator'); // Import the Excel generation function
+
+app.use(bodyParser.json());
+
+app.post('/generate-excel', (req, res) => {
+  const sheetsData = req.body;
+  const workbook = generateExcel(sheetsData); // Use the function
+
+  res.setHeader(
+    'Content-Type',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  );
+  res.setHeader(
+    'Content-Disposition',
+    'attachment; filename=generated-excel.xlsx'
+  );
+
+  workbook.xlsx.write(res).then(() => {
+    res.end();
+  });
+});
+
+
+
+
+
+
 // const api1Routes = require('./routes/api1') //imported api1
 
 // app.use('./routes/api1', api1Routes);

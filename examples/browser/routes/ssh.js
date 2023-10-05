@@ -58,6 +58,6 @@ executeSSHCommand(ip, port, username, password, command)
   });
 
 
-  // module.exports = {
-  //   executeSSHCommand
-  // };
+  module.exports = {
+    executeSSHCommand
+  };
